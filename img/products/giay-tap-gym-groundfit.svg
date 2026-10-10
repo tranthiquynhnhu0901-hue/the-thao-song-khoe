@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-label="Minh họa Giày tập gym GroundFit">
+ <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#F1EDFC"/><stop offset="1" stop-color="#E3D7F1"/></linearGradient><filter id="sh"><feGaussianBlur stdDeviation="22"/></filter></defs>
+ <rect width="720" height="720" fill="url(#bg)"/>
+ <circle cx="590" cy="133" r="230" fill="#217C88" opacity=".12"/><circle cx="188" cy="596" r="196" fill="#fff" opacity=".35"/>
+ <path d="M-40 575 L800 140" stroke="#217C88" stroke-width="85" opacity=".055"/>
+ <g opacity=".21" fill="none" stroke="#217C88" stroke-width="3"><circle cx="573" cy="139" r="72"/><circle cx="573" cy="139" r="102"/><path d="M85 190 h125 M112 214 h82"/></g>
+ <ellipse cx="364" cy="565" rx="220" ry="38" fill="#1B2943" opacity=".20" filter="url(#sh)"/>
+ <g transform="rotate(4 360 360)"><path d="M164 420 Q232 404 291 322 L347 337 L397 383 Q457 404 524 408 Q553 411 575 447 L568 484 Q489 498 405 488 L182 488 Q151 482 145 457 Z" fill="#217C88" stroke="#1B2943" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/><path d="M153 461 Q312 479 568 467 L568 490 Q350 514 166 491 Z" fill="#F7F8FD" stroke="#1B2943" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><path d="M332 357 L371 350" fill="none" stroke="#F9FAFC" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M359 373 L398 366" fill="none" stroke="#F9FAFC" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M388 388 L427 381" fill="none" stroke="#F9FAFC" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M199 422 L275 357 L293 375 L261 421 Z" fill="#E9B75B" stroke="none" stroke-width="0" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <rect x="26" y="25" width="159" height="37" rx="18" fill="#172C4B"/><text x="105" y="49" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="15" font-weight="bold" letter-spacing="2">SPORTHUB</text>
+ <text x="35" y="670" fill="#1E2F46" font-size="24" font-family="Arial,sans-serif" font-weight="700">Giày tập gym GroundFit</text>
+ <text x="35" y="696" fill="#56657C" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">MOVE MORE • FEEL BETTER</text>
+ </svg>

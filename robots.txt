@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /quan-tri/
+Disallow: /tai-khoan/
+Disallow: /thanh-toan/
+Disallow: /gio-hang/
+Sitemap: https://tranthiquynhnhu0901-hue.github.io/the-thao-song-khoe/sitemap.xml

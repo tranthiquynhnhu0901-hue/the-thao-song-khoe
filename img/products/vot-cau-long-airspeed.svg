@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-label="Minh họa Vợt cầu lông Airspeed">
+ <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#E9F5FF"/><stop offset="1" stop-color="#CFE1FC"/></linearGradient><filter id="sh"><feGaussianBlur stdDeviation="22"/></filter></defs>
+ <rect width="720" height="720" fill="url(#bg)"/>
+ <circle cx="590" cy="133" r="230" fill="#D08046" opacity=".12"/><circle cx="260" cy="596" r="196" fill="#fff" opacity=".35"/>
+ <path d="M-40 575 L800 140" stroke="#D08046" stroke-width="85" opacity=".055"/>
+ <g opacity=".21" fill="none" stroke="#D08046" stroke-width="3"><circle cx="573" cy="139" r="72"/><circle cx="573" cy="139" r="102"/><path d="M85 190 h125 M112 214 h82"/></g>
+ <ellipse cx="364" cy="565" rx="220" ry="38" fill="#1B2943" opacity=".20" filter="url(#sh)"/>
+ <g transform="rotate(-6 360 360)"><ellipse cx="354" cy="287" rx="123" ry="156" fill="none" stroke="#1B2943" stroke-width="17"/><ellipse cx="354" cy="287" rx="109" ry="143" fill="none" stroke="#D08046" stroke-width="14"/><path d="M354 440 L354 578" fill="none" stroke="#D08046" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <rect x="26" y="25" width="159" height="37" rx="18" fill="#172C4B"/><text x="105" y="49" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="15" font-weight="bold" letter-spacing="2">SPORTHUB</text>
+ <text x="35" y="670" fill="#1E2F46" font-size="24" font-family="Arial,sans-serif" font-weight="700">Vợt cầu lông Airspeed</text>
+ <text x="35" y="696" fill="#56657C" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">MOVE MORE • FEEL BETTER</text>
+ </svg>

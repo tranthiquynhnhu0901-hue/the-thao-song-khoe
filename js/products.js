@@ -1,0 +1,1237 @@
+window.SPORT_PRODUCTS = [
+  {
+    "id": "SH001",
+    "slug": "ao-thun-chay-bo-aero",
+    "name": "Áo thun chạy bộ Aero",
+    "category": "thoi-trang-the-thao",
+    "categoryName": "Thời trang thể thao",
+    "price": 289000,
+    "salePrice": null,
+    "short": "Áo thể thao thoáng khí, phom gọn cho những buổi chạy năng động.",
+    "description": "Áo thun chạy bộ Aero là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Áo thể thao thoáng khí, phom gọn cho những buổi chạy năng động. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Thời trang thể thao",
+      "Mẫu": "SPORTHUB 001",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 15,
+    "image": "assets/img/products/ao-thun-chay-bo-aero.webp",
+    "kind": "shirt",
+    "new": false,
+    "featured": false,
+    "color": "#3469BD",
+    "fallbackImage": "assets/img/products/ao-thun-chay-bo-aero.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH002",
+    "slug": "ao-bong-ro-court-move",
+    "name": "Áo bóng rổ Court Move",
+    "category": "thoi-trang-the-thao",
+    "categoryName": "Thời trang thể thao",
+    "price": 329000,
+    "salePrice": null,
+    "short": "Kiểu dáng rộng thoải mái, dễ phối cho cả sân đấu và đường phố.",
+    "description": "Áo bóng rổ Court Move là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Kiểu dáng rộng thoải mái, dễ phối cho cả sân đấu và đường phố. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Thời trang thể thao",
+      "Mẫu": "SPORTHUB 002",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 18,
+    "image": "assets/img/products/ao-bong-ro-court-move.webp",
+    "kind": "jersey",
+    "new": false,
+    "featured": false,
+    "color": "#F0734E",
+    "fallbackImage": "assets/img/products/ao-bong-ro-court-move.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH003",
+    "slug": "quan-short-tap-luyen-sprint",
+    "name": "Quần short tập luyện Sprint",
+    "category": "thoi-trang-the-thao",
+    "categoryName": "Thời trang thể thao",
+    "price": 259000,
+    "salePrice": null,
+    "short": "Quần ngắn nhẹ, cạp co giãn phù hợp vận động đa dạng.",
+    "description": "Quần short tập luyện Sprint là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Quần ngắn nhẹ, cạp co giãn phù hợp vận động đa dạng. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Thời trang thể thao",
+      "Mẫu": "SPORTHUB 003",
+      "Màu minh họa": "Tím than",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 21,
+    "image": "assets/img/products/quan-short-tap-luyen-sprint.webp",
+    "kind": "shorts",
+    "new": false,
+    "featured": true,
+    "color": "#725AC9",
+    "fallbackImage": "assets/img/products/quan-short-tap-luyen-sprint.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH004",
+    "slug": "ao-polo-the-thao-active",
+    "name": "Áo polo thể thao Active",
+    "category": "thoi-trang-the-thao",
+    "categoryName": "Thời trang thể thao",
+    "price": 389000,
+    "salePrice": 334000,
+    "short": "Phong cách chỉn chu và năng động khi chơi thể thao ngoài trời.",
+    "description": "Áo polo thể thao Active là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Phong cách chỉn chu và năng động khi chơi thể thao ngoài trời. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Thời trang thể thao",
+      "Mẫu": "SPORTHUB 004",
+      "Màu minh họa": "Xanh lá",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 24,
+    "image": "assets/img/products/ao-polo-the-thao-active.webp",
+    "kind": "polo",
+    "new": false,
+    "featured": false,
+    "color": "#217C88",
+    "fallbackImage": "assets/img/products/ao-polo-the-thao-active.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH005",
+    "slug": "ao-khoac-gio-tempo",
+    "name": "Áo khoác gió Tempo",
+    "category": "thoi-trang-the-thao",
+    "categoryName": "Thời trang thể thao",
+    "price": 649000,
+    "salePrice": null,
+    "short": "Lớp khoác mỏng tiện lợi cho những ngày thời tiết thay đổi.",
+    "description": "Áo khoác gió Tempo là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Lớp khoác mỏng tiện lợi cho những ngày thời tiết thay đổi. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Thời trang thể thao",
+      "Mẫu": "SPORTHUB 005",
+      "Màu minh họa": "Hồng đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 27,
+    "image": "assets/img/products/ao-khoac-gio-tempo.webp",
+    "kind": "jacket",
+    "new": true,
+    "featured": false,
+    "color": "#E69A41",
+    "fallbackImage": "assets/img/products/ao-khoac-gio-tempo.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH006",
+    "slug": "quan-legging-flex",
+    "name": "Quần legging Flex",
+    "category": "thoi-trang-the-thao",
+    "categoryName": "Thời trang thể thao",
+    "price": 429000,
+    "salePrice": null,
+    "short": "Thiết kế ôm linh hoạt hỗ trợ các chuyển động hàng ngày.",
+    "description": "Quần legging Flex là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Thiết kế ôm linh hoạt hỗ trợ các chuyển động hàng ngày. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Thời trang thể thao",
+      "Mẫu": "SPORTHUB 006",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 30,
+    "image": "assets/img/products/quan-legging-flex.webp",
+    "kind": "leggings",
+    "new": false,
+    "featured": true,
+    "color": "#4765A3",
+    "fallbackImage": "assets/img/products/quan-legging-flex.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH007",
+    "slug": "ao-the-thao-nu-motion",
+    "name": "Áo thể thao nữ Motion",
+    "category": "thoi-trang-the-thao",
+    "categoryName": "Thời trang thể thao",
+    "price": 359000,
+    "salePrice": null,
+    "short": "Thiết kế tối giản, dễ kết hợp cùng trang phục luyện tập.",
+    "description": "Áo thể thao nữ Motion là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Thiết kế tối giản, dễ kết hợp cùng trang phục luyện tập. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Thời trang thể thao",
+      "Mẫu": "SPORTHUB 007",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "S",
+      "M",
+      "L",
+      "XL"
+    ],
+    "stock": 33,
+    "image": "assets/img/products/ao-the-thao-nu-motion.webp",
+    "kind": "top",
+    "new": true,
+    "featured": false,
+    "color": "#C56783",
+    "fallbackImage": "assets/img/products/ao-the-thao-nu-motion.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH008",
+    "slug": "giay-chay-bo-roadflow",
+    "name": "Giày chạy bộ Roadflow",
+    "category": "giay-the-thao",
+    "categoryName": "Giày thể thao",
+    "price": 1290000,
+    "salePrice": 1109000,
+    "short": "Thiết kế lấy cảm hứng từ đường chạy, kiểu dáng hiện đại.",
+    "description": "Giày chạy bộ Roadflow là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Thiết kế lấy cảm hứng từ đường chạy, kiểu dáng hiện đại. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Giày thể thao",
+      "Mẫu": "SPORTHUB 008",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42"
+    ],
+    "stock": 15,
+    "image": "assets/img/products/giay-chay-bo-roadflow.webp",
+    "kind": "runner",
+    "new": false,
+    "featured": false,
+    "color": "#725AC9",
+    "fallbackImage": "assets/img/products/giay-chay-bo-roadflow.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH009",
+    "slug": "giay-tap-gym-groundfit",
+    "name": "Giày tập gym GroundFit",
+    "category": "giay-the-thao",
+    "categoryName": "Giày thể thao",
+    "price": 1150000,
+    "salePrice": null,
+    "short": "Dáng đế vững, hướng đến các bài tập trong phòng gym.",
+    "description": "Giày tập gym GroundFit là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Dáng đế vững, hướng đến các bài tập trong phòng gym. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Giày thể thao",
+      "Mẫu": "SPORTHUB 009",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42"
+    ],
+    "stock": 18,
+    "image": "assets/img/products/giay-tap-gym-groundfit.webp",
+    "kind": "trainer",
+    "new": false,
+    "featured": true,
+    "color": "#217C88",
+    "fallbackImage": "assets/img/products/giay-tap-gym-groundfit.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH010",
+    "slug": "giay-pickleball-court-one",
+    "name": "Giày Pickleball Court One",
+    "category": "giay-the-thao",
+    "categoryName": "Giày thể thao",
+    "price": 1390000,
+    "salePrice": null,
+    "short": "Phom giày dành cho hoạt động trên sân thể thao.",
+    "description": "Giày Pickleball Court One là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Phom giày dành cho hoạt động trên sân thể thao. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Giày thể thao",
+      "Mẫu": "SPORTHUB 010",
+      "Màu minh họa": "Tím than",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42"
+    ],
+    "stock": 21,
+    "image": "assets/img/products/giay-pickleball-court-one.webp",
+    "kind": "court",
+    "new": true,
+    "featured": false,
+    "color": "#E69A41",
+    "fallbackImage": "assets/img/products/giay-pickleball-court-one.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH011",
+    "slug": "giay-cau-long-swiftstep",
+    "name": "Giày cầu lông Swiftstep",
+    "category": "giay-the-thao",
+    "categoryName": "Giày thể thao",
+    "price": 1190000,
+    "salePrice": null,
+    "short": "Mẫu giày sân trong nhà với họa tiết năng động.",
+    "description": "Giày cầu lông Swiftstep là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Mẫu giày sân trong nhà với họa tiết năng động. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Giày thể thao",
+      "Mẫu": "SPORTHUB 011",
+      "Màu minh họa": "Xanh lá",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42"
+    ],
+    "stock": 24,
+    "image": "assets/img/products/giay-cau-long-swiftstep.webp",
+    "kind": "indoor",
+    "new": false,
+    "featured": false,
+    "color": "#4765A3",
+    "fallbackImage": "assets/img/products/giay-cau-long-swiftstep.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH012",
+    "slug": "giay-i-bo-everyday",
+    "name": "Giày đi bộ Everyday",
+    "category": "giay-the-thao",
+    "categoryName": "Giày thể thao",
+    "price": 890000,
+    "salePrice": 765000,
+    "short": "Giày thể thao linh hoạt cho nhịp sống thường ngày.",
+    "description": "Giày đi bộ Everyday là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Giày thể thao linh hoạt cho nhịp sống thường ngày. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Giày thể thao",
+      "Mẫu": "SPORTHUB 012",
+      "Màu minh họa": "Hồng đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42"
+    ],
+    "stock": 27,
+    "image": "assets/img/products/giay-i-bo-everyday.webp",
+    "kind": "walking",
+    "new": false,
+    "featured": true,
+    "color": "#C56783",
+    "fallbackImage": "assets/img/products/giay-i-bo-everyday.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH013",
+    "slug": "giay-lifestyle-street-pace",
+    "name": "Giày lifestyle Street Pace",
+    "category": "giay-the-thao",
+    "categoryName": "Giày thể thao",
+    "price": 990000,
+    "salePrice": null,
+    "short": "Phối màu tinh gọn, kết hợp cùng trang phục thường nhật.",
+    "description": "Giày lifestyle Street Pace là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Phối màu tinh gọn, kết hợp cùng trang phục thường nhật. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Giày thể thao",
+      "Mẫu": "SPORTHUB 013",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42"
+    ],
+    "stock": 30,
+    "image": "assets/img/products/giay-lifestyle-street-pace.webp",
+    "kind": "sneaker",
+    "new": false,
+    "featured": false,
+    "color": "#718E43",
+    "fallbackImage": "assets/img/products/giay-lifestyle-street-pace.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH014",
+    "slug": "bo-ta-tay-neoprene",
+    "name": "Bộ tạ tay neoprene",
+    "category": "gym-fitness",
+    "categoryName": "Gym & Fitness",
+    "price": 490000,
+    "salePrice": null,
+    "short": "Cặp tạ tay bọc lớp màu dễ nhận diện cho góc tập tại nhà.",
+    "description": "Bộ tạ tay neoprene là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Cặp tạ tay bọc lớp màu dễ nhận diện cho góc tập tại nhà. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Gym & Fitness",
+      "Mẫu": "SPORTHUB 014",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 15,
+    "image": "assets/img/products/bo-ta-tay-neoprene.webp",
+    "kind": "dumbbell",
+    "new": true,
+    "featured": false,
+    "color": "#E69A41",
+    "fallbackImage": "assets/img/products/bo-ta-tay-neoprene.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH015",
+    "slug": "ta-am-kettlebell-core",
+    "name": "Tạ ấm Kettlebell Core",
+    "category": "gym-fitness",
+    "categoryName": "Gym & Fitness",
+    "price": 590000,
+    "salePrice": null,
+    "short": "Thiết kế tay cầm vòng cung cho bài tập sức mạnh.",
+    "description": "Tạ ấm Kettlebell Core là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Thiết kế tay cầm vòng cung cho bài tập sức mạnh. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Gym & Fitness",
+      "Mẫu": "SPORTHUB 015",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 18,
+    "image": "assets/img/products/ta-am-kettlebell-core.webp",
+    "kind": "kettlebell",
+    "new": true,
+    "featured": true,
+    "color": "#4765A3",
+    "fallbackImage": "assets/img/products/ta-am-kettlebell-core.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH016",
+    "slug": "bo-day-khang-luc-3-muc",
+    "name": "Bộ dây kháng lực 3 mức",
+    "category": "gym-fitness",
+    "categoryName": "Gym & Fitness",
+    "price": 249000,
+    "salePrice": 214000,
+    "short": "Bộ dây đa mức lực phù hợp nhiều bài tập hỗ trợ.",
+    "description": "Bộ dây kháng lực 3 mức là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Bộ dây đa mức lực phù hợp nhiều bài tập hỗ trợ. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Gym & Fitness",
+      "Mẫu": "SPORTHUB 016",
+      "Màu minh họa": "Tím than",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 21,
+    "image": "assets/img/products/bo-day-khang-luc-3-muc.webp",
+    "kind": "bands",
+    "new": false,
+    "featured": false,
+    "color": "#C56783",
+    "fallbackImage": "assets/img/products/bo-day-khang-luc-3-muc.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH017",
+    "slug": "con-lan-tap-bung-ab-wheel",
+    "name": "Con lăn tập bụng AB Wheel",
+    "category": "gym-fitness",
+    "categoryName": "Gym & Fitness",
+    "price": 319000,
+    "salePrice": null,
+    "short": "Dụng cụ con lăn nhỏ gọn cho bài tập cơ trung tâm.",
+    "description": "Con lăn tập bụng AB Wheel là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Dụng cụ con lăn nhỏ gọn cho bài tập cơ trung tâm. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Gym & Fitness",
+      "Mẫu": "SPORTHUB 017",
+      "Màu minh họa": "Xanh lá",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 24,
+    "image": "assets/img/products/con-lan-tap-bung-ab-wheel.webp",
+    "kind": "wheel",
+    "new": false,
+    "featured": false,
+    "color": "#718E43",
+    "fallbackImage": "assets/img/products/con-lan-tap-bung-ab-wheel.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH018",
+    "slug": "day-nhay-toc-o-pulse",
+    "name": "Dây nhảy tốc độ Pulse",
+    "category": "gym-fitness",
+    "categoryName": "Gym & Fitness",
+    "price": 189000,
+    "salePrice": null,
+    "short": "Dây nhảy tay cầm nhỏ gọn, dễ mang theo khi tập luyện.",
+    "description": "Dây nhảy tốc độ Pulse là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Dây nhảy tay cầm nhỏ gọn, dễ mang theo khi tập luyện. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Gym & Fitness",
+      "Mẫu": "SPORTHUB 018",
+      "Màu minh họa": "Hồng đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 27,
+    "image": "assets/img/products/day-nhay-toc-o-pulse.webp",
+    "kind": "rope",
+    "new": false,
+    "featured": true,
+    "color": "#D08046",
+    "fallbackImage": "assets/img/products/day-nhay-toc-o-pulse.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH019",
+    "slug": "banh-ta-boc-cao-su",
+    "name": "Bánh tạ bọc cao su",
+    "category": "gym-fitness",
+    "categoryName": "Gym & Fitness",
+    "price": 690000,
+    "salePrice": null,
+    "short": "Bánh tạ dạng đĩa với tay nắm khoét tiện lợi.",
+    "description": "Bánh tạ bọc cao su là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Bánh tạ dạng đĩa với tay nắm khoét tiện lợi. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Gym & Fitness",
+      "Mẫu": "SPORTHUB 019",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 30,
+    "image": "assets/img/products/banh-ta-boc-cao-su.webp",
+    "kind": "plate",
+    "new": false,
+    "featured": false,
+    "color": "#7F6CB0",
+    "fallbackImage": "assets/img/products/banh-ta-boc-cao-su.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH020",
+    "slug": "vot-pickleball-nova",
+    "name": "Vợt Pickleball Nova",
+    "category": "pickleball",
+    "categoryName": "Pickleball",
+    "price": 1190000,
+    "salePrice": 1023000,
+    "short": "Mặt vợt dáng rộng, thiết kế màu sắc trẻ trung.",
+    "description": "Vợt Pickleball Nova là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Mặt vợt dáng rộng, thiết kế màu sắc trẻ trung. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Pickleball",
+      "Mẫu": "SPORTHUB 020",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 15,
+    "image": "assets/img/products/vot-pickleball-nova.webp",
+    "kind": "paddle",
+    "new": true,
+    "featured": false,
+    "color": "#C56783",
+    "fallbackImage": "assets/img/products/vot-pickleball-nova.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH021",
+    "slug": "vot-pickleball-control-x",
+    "name": "Vợt Pickleball Control X",
+    "category": "pickleball",
+    "categoryName": "Pickleball",
+    "price": 1490000,
+    "salePrice": null,
+    "short": "Vợt có phom thuôn, cảm giác điều khiển linh hoạt.",
+    "description": "Vợt Pickleball Control X là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Vợt có phom thuôn, cảm giác điều khiển linh hoạt. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Pickleball",
+      "Mẫu": "SPORTHUB 021",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 18,
+    "image": "assets/img/products/vot-pickleball-control-x.webp",
+    "kind": "paddle2",
+    "new": true,
+    "featured": true,
+    "color": "#718E43",
+    "fallbackImage": "assets/img/products/vot-pickleball-control-x.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH022",
+    "slug": "bo-bong-pickleball-6-qua",
+    "name": "Bộ bóng Pickleball 6 quả",
+    "category": "pickleball",
+    "categoryName": "Pickleball",
+    "price": 219000,
+    "salePrice": null,
+    "short": "Bóng có lỗ thoáng dùng cho trò chơi pickleball.",
+    "description": "Bộ bóng Pickleball 6 quả là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Bóng có lỗ thoáng dùng cho trò chơi pickleball. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Pickleball",
+      "Mẫu": "SPORTHUB 022",
+      "Màu minh họa": "Tím than",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 21,
+    "image": "assets/img/products/bo-bong-pickleball-6-qua.webp",
+    "kind": "balls",
+    "new": false,
+    "featured": false,
+    "color": "#D08046",
+    "fallbackImage": "assets/img/products/bo-bong-pickleball-6-qua.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH023",
+    "slug": "tui-ung-vot-pickleball",
+    "name": "Túi đựng vợt Pickleball",
+    "category": "pickleball",
+    "categoryName": "Pickleball",
+    "price": 459000,
+    "salePrice": null,
+    "short": "Túi gọn nhẹ có ngăn đựng vợt và vật dụng nhỏ.",
+    "description": "Túi đựng vợt Pickleball là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Túi gọn nhẹ có ngăn đựng vợt và vật dụng nhỏ. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Pickleball",
+      "Mẫu": "SPORTHUB 023",
+      "Màu minh họa": "Xanh lá",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 24,
+    "image": "assets/img/products/tui-ung-vot-pickleball.webp",
+    "kind": "paddlebag",
+    "new": false,
+    "featured": false,
+    "color": "#7F6CB0",
+    "fallbackImage": "assets/img/products/tui-ung-vot-pickleball.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH024",
+    "slug": "bang-quan-can-vot",
+    "name": "Băng quấn cán vợt",
+    "category": "pickleball",
+    "categoryName": "Pickleball",
+    "price": 99000,
+    "salePrice": 85000,
+    "short": "Phụ kiện quấn cán giúp cầm nắm dễ chịu.",
+    "description": "Băng quấn cán vợt là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Phụ kiện quấn cán giúp cầm nắm dễ chịu. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Pickleball",
+      "Mẫu": "SPORTHUB 024",
+      "Màu minh họa": "Hồng đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 27,
+    "image": "assets/img/products/bang-quan-can-vot.webp",
+    "kind": "grip",
+    "new": false,
+    "featured": true,
+    "color": "#3469BD",
+    "fallbackImage": "assets/img/products/bang-quan-can-vot.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH025",
+    "slug": "vot-cau-long-airspeed",
+    "name": "Vợt cầu lông Airspeed",
+    "category": "cau-long",
+    "categoryName": "Cầu lông",
+    "price": 1090000,
+    "salePrice": null,
+    "short": "Khung vợt phối màu nổi bật cho người yêu cầu lông.",
+    "description": "Vợt cầu lông Airspeed là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Khung vợt phối màu nổi bật cho người yêu cầu lông. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Cầu lông",
+      "Mẫu": "SPORTHUB 025",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 15,
+    "image": "assets/img/products/vot-cau-long-airspeed.webp",
+    "kind": "racket",
+    "new": true,
+    "featured": false,
+    "color": "#D08046",
+    "fallbackImage": "assets/img/products/vot-cau-long-airspeed.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH026",
+    "slug": "ong-cau-long-tap-luyen",
+    "name": "Ống cầu lông tập luyện",
+    "category": "cau-long",
+    "categoryName": "Cầu lông",
+    "price": 229000,
+    "salePrice": null,
+    "short": "Ống cầu dùng cho hoạt động tập luyện và giải trí.",
+    "description": "Ống cầu lông tập luyện là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Ống cầu dùng cho hoạt động tập luyện và giải trí. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Cầu lông",
+      "Mẫu": "SPORTHUB 026",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 18,
+    "image": "assets/img/products/ong-cau-long-tap-luyen.webp",
+    "kind": "shuttle",
+    "new": false,
+    "featured": false,
+    "color": "#7F6CB0",
+    "fallbackImage": "assets/img/products/ong-cau-long-tap-luyen.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH027",
+    "slug": "bo-day-cuoc-cau-long",
+    "name": "Bộ dây cước cầu lông",
+    "category": "cau-long",
+    "categoryName": "Cầu lông",
+    "price": 169000,
+    "salePrice": null,
+    "short": "Phụ kiện thay dây đan mặt vợt với gói bảo quản riêng.",
+    "description": "Bộ dây cước cầu lông là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Phụ kiện thay dây đan mặt vợt với gói bảo quản riêng. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Cầu lông",
+      "Mẫu": "SPORTHUB 027",
+      "Màu minh họa": "Tím than",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 21,
+    "image": "assets/img/products/bo-day-cuoc-cau-long.webp",
+    "kind": "strings",
+    "new": false,
+    "featured": true,
+    "color": "#3469BD",
+    "fallbackImage": "assets/img/products/bo-day-cuoc-cau-long.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH028",
+    "slug": "tui-ung-vot-cau-long",
+    "name": "Túi đựng vợt cầu lông",
+    "category": "cau-long",
+    "categoryName": "Cầu lông",
+    "price": 549000,
+    "salePrice": 472000,
+    "short": "Túi dáng dài hỗ trợ cất giữ dụng cụ sau trận đấu.",
+    "description": "Túi đựng vợt cầu lông là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Túi dáng dài hỗ trợ cất giữ dụng cụ sau trận đấu. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Cầu lông",
+      "Mẫu": "SPORTHUB 028",
+      "Màu minh họa": "Xanh lá",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 24,
+    "image": "assets/img/products/tui-ung-vot-cau-long.webp",
+    "kind": "racketbag",
+    "new": true,
+    "featured": false,
+    "color": "#F0734E",
+    "fallbackImage": "assets/img/products/tui-ung-vot-cau-long.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH029",
+    "slug": "tham-yoga-harmony",
+    "name": "Thảm yoga Harmony",
+    "category": "yoga-pilates",
+    "categoryName": "Yoga & Pilates",
+    "price": 499000,
+    "salePrice": null,
+    "short": "Thảm tập có bề mặt vân nhẹ, màu sắc thư giãn.",
+    "description": "Thảm yoga Harmony là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Thảm tập có bề mặt vân nhẹ, màu sắc thư giãn. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Yoga & Pilates",
+      "Mẫu": "SPORTHUB 029",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 15,
+    "image": "assets/img/products/tham-yoga-harmony.webp",
+    "kind": "mat",
+    "new": false,
+    "featured": false,
+    "color": "#3469BD",
+    "fallbackImage": "assets/img/products/tham-yoga-harmony.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH030",
+    "slug": "bo-gach-yoga-balance",
+    "name": "Bộ gạch yoga Balance",
+    "category": "yoga-pilates",
+    "categoryName": "Yoga & Pilates",
+    "price": 299000,
+    "salePrice": null,
+    "short": "Hai khối hỗ trợ tư thế tập và kéo giãn.",
+    "description": "Bộ gạch yoga Balance là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Hai khối hỗ trợ tư thế tập và kéo giãn. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Yoga & Pilates",
+      "Mẫu": "SPORTHUB 030",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 18,
+    "image": "assets/img/products/bo-gach-yoga-balance.webp",
+    "kind": "blocks",
+    "new": true,
+    "featured": true,
+    "color": "#F0734E",
+    "fallbackImage": "assets/img/products/bo-gach-yoga-balance.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH031",
+    "slug": "vong-tap-pilates-circle",
+    "name": "Vòng tập Pilates Circle",
+    "category": "yoga-pilates",
+    "categoryName": "Yoga & Pilates",
+    "price": 339000,
+    "salePrice": null,
+    "short": "Vòng tập đàn hồi dành cho các bài Pilates cơ bản.",
+    "description": "Vòng tập Pilates Circle là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Vòng tập đàn hồi dành cho các bài Pilates cơ bản. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Yoga & Pilates",
+      "Mẫu": "SPORTHUB 031",
+      "Màu minh họa": "Tím than",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 21,
+    "image": "assets/img/products/vong-tap-pilates-circle.webp",
+    "kind": "circle",
+    "new": false,
+    "featured": false,
+    "color": "#725AC9",
+    "fallbackImage": "assets/img/products/vong-tap-pilates-circle.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH032",
+    "slug": "day-keo-gian-yoga",
+    "name": "Dây kéo giãn yoga",
+    "category": "yoga-pilates",
+    "categoryName": "Yoga & Pilates",
+    "price": 179000,
+    "salePrice": 153000,
+    "short": "Dây hỗ trợ kéo giãn giúp điều chỉnh tư thế dễ dàng.",
+    "description": "Dây kéo giãn yoga là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Dây hỗ trợ kéo giãn giúp điều chỉnh tư thế dễ dàng. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Yoga & Pilates",
+      "Mẫu": "SPORTHUB 032",
+      "Màu minh họa": "Xanh lá",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 24,
+    "image": "assets/img/products/day-keo-gian-yoga.webp",
+    "kind": "strap",
+    "new": false,
+    "featured": false,
+    "color": "#217C88",
+    "fallbackImage": "assets/img/products/day-keo-gian-yoga.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH033",
+    "slug": "binh-nuoc-the-thao-hydro",
+    "name": "Bình nước thể thao Hydro",
+    "category": "phu-kien",
+    "categoryName": "Phụ kiện thể thao",
+    "price": 249000,
+    "salePrice": null,
+    "short": "Bình nước thân cao, nắp đậy thuận tiện khi di chuyển.",
+    "description": "Bình nước thể thao Hydro là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Bình nước thân cao, nắp đậy thuận tiện khi di chuyển. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Phụ kiện thể thao",
+      "Mẫu": "SPORTHUB 033",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 15,
+    "image": "assets/img/products/binh-nuoc-the-thao-hydro.webp",
+    "kind": "bottle",
+    "new": false,
+    "featured": true,
+    "color": "#725AC9",
+    "fallbackImage": "assets/img/products/binh-nuoc-the-thao-hydro.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH034",
+    "slug": "tui-du-lich-the-thao-gobag",
+    "name": "Túi du lịch thể thao GoBag",
+    "category": "phu-kien",
+    "categoryName": "Phụ kiện thể thao",
+    "price": 799000,
+    "salePrice": null,
+    "short": "Túi đa năng dùng đi tập, đi chơi hoặc du lịch ngắn ngày.",
+    "description": "Túi du lịch thể thao GoBag là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Túi đa năng dùng đi tập, đi chơi hoặc du lịch ngắn ngày. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Phụ kiện thể thao",
+      "Mẫu": "SPORTHUB 034",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 18,
+    "image": "assets/img/products/tui-du-lich-the-thao-gobag.webp",
+    "kind": "bag",
+    "new": false,
+    "featured": false,
+    "color": "#217C88",
+    "fallbackImage": "assets/img/products/tui-du-lich-the-thao-gobag.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH035",
+    "slug": "vo-the-thao-performance",
+    "name": "Vớ thể thao Performance",
+    "category": "phu-kien",
+    "categoryName": "Phụ kiện thể thao",
+    "price": 129000,
+    "salePrice": null,
+    "short": "Đôi vớ cổ vừa với họa tiết thể thao khỏe khoắn.",
+    "description": "Vớ thể thao Performance là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Đôi vớ cổ vừa với họa tiết thể thao khỏe khoắn. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Phụ kiện thể thao",
+      "Mẫu": "SPORTHUB 035",
+      "Màu minh họa": "Tím than",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 21,
+    "image": "assets/img/products/vo-the-thao-performance.webp",
+    "kind": "socks",
+    "new": true,
+    "featured": false,
+    "color": "#E69A41",
+    "fallbackImage": "assets/img/products/vo-the-thao-performance.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH036",
+    "slug": "bang-o-tham-hut-active",
+    "name": "Băng đô thấm hút Active",
+    "category": "phu-kien",
+    "categoryName": "Phụ kiện thể thao",
+    "price": 99000,
+    "salePrice": 85000,
+    "short": "Băng đô co giãn cho các buổi tập cường độ cao.",
+    "description": "Băng đô thấm hút Active là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Băng đô co giãn cho các buổi tập cường độ cao. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Phụ kiện thể thao",
+      "Mẫu": "SPORTHUB 036",
+      "Màu minh họa": "Xanh lá",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 24,
+    "image": "assets/img/products/bang-o-tham-hut-active.webp",
+    "kind": "headband",
+    "new": false,
+    "featured": true,
+    "color": "#4765A3",
+    "fallbackImage": "assets/img/products/bang-o-tham-hut-active.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH037",
+    "slug": "ai-chay-bo-running-belt",
+    "name": "Đai chạy bộ Running Belt",
+    "category": "phu-kien",
+    "categoryName": "Phụ kiện thể thao",
+    "price": 289000,
+    "salePrice": null,
+    "short": "Đai đeo gọn để mang vật dụng thiết yếu khi chạy.",
+    "description": "Đai chạy bộ Running Belt là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Đai đeo gọn để mang vật dụng thiết yếu khi chạy. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Phụ kiện thể thao",
+      "Mẫu": "SPORTHUB 037",
+      "Màu minh họa": "Hồng đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 27,
+    "image": "assets/img/products/ai-chay-bo-running-belt.webp",
+    "kind": "belt",
+    "new": false,
+    "featured": false,
+    "color": "#C56783",
+    "fallbackImage": "assets/img/products/ai-chay-bo-running-belt.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH038",
+    "slug": "ong-lan-co-foam-roller",
+    "name": "Ống lăn cơ Foam Roller",
+    "category": "phuc-hoi",
+    "categoryName": "Chăm sóc & phục hồi",
+    "price": 399000,
+    "salePrice": null,
+    "short": "Ống lăn bề mặt gân dùng trong các bài tự massage cơ.",
+    "description": "Ống lăn cơ Foam Roller là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Ống lăn bề mặt gân dùng trong các bài tự massage cơ. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Chăm sóc & phục hồi",
+      "Mẫu": "SPORTHUB 038",
+      "Màu minh họa": "Xanh biển",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 15,
+    "image": "assets/img/products/ong-lan-co-foam-roller.webp",
+    "kind": "roller",
+    "new": false,
+    "featured": false,
+    "color": "#E69A41",
+    "fallbackImage": "assets/img/products/ong-lan-co-foam-roller.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH039",
+    "slug": "may-massage-cam-tay-compact",
+    "name": "Máy massage cầm tay Compact",
+    "category": "phuc-hoi",
+    "categoryName": "Chăm sóc & phục hồi",
+    "price": 1290000,
+    "salePrice": null,
+    "short": "Thiết bị massage cầm tay với thiết kế tối giản.",
+    "description": "Máy massage cầm tay Compact là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Thiết bị massage cầm tay với thiết kế tối giản. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Chăm sóc & phục hồi",
+      "Mẫu": "SPORTHUB 039",
+      "Màu minh họa": "Cam đất",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 18,
+    "image": "assets/img/products/may-massage-cam-tay-compact.webp",
+    "kind": "massage",
+    "new": false,
+    "featured": true,
+    "color": "#4765A3",
+    "fallbackImage": "assets/img/products/may-massage-cam-tay-compact.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  },
+  {
+    "id": "SH040",
+    "slug": "bong-massage-iem-co",
+    "name": "Bóng massage điểm cơ",
+    "category": "phuc-hoi",
+    "categoryName": "Chăm sóc & phục hồi",
+    "price": 169000,
+    "salePrice": 145000,
+    "short": "Bóng nhỏ bề mặt chắc, hỗ trợ thao tác lăn thả lỏng.",
+    "description": "Bóng massage điểm cơ là lựa chọn trong bộ sưu tập SPORTHUB, dành cho người yêu vận động và phong cách sống năng động. Bóng nhỏ bề mặt chắc, hỗ trợ thao tác lăn thả lỏng. Hình ảnh trên website là minh họa sản phẩm mẫu; thông tin và kích thước thực tế cần được xác nhận trước khi bán chính thức.",
+    "specs": {
+      "Loại sản phẩm": "Chăm sóc & phục hồi",
+      "Mẫu": "SPORTHUB 040",
+      "Màu minh họa": "Tím than",
+      "Lưu ý": "Thông số chi tiết được bổ sung khi nhập hàng thật"
+    },
+    "variants": [
+      "Tiêu chuẩn"
+    ],
+    "stock": 21,
+    "image": "assets/img/products/bong-massage-iem-co.webp",
+    "kind": "massageball",
+    "new": true,
+    "featured": false,
+    "color": "#C56783",
+    "fallbackImage": "assets/img/products/bong-massage-iem-co.svg",
+    "photoNotice": "Ảnh SVG minh họa cho sản phẩm mẫu; khi có ảnh thật WebP đúng tên, website tự hiển thị ảnh mới."
+  }
+];
+window.SPORT_CATEGORIES = [
+  {
+    "slug": "thoi-trang-the-thao",
+    "name": "Thời trang thể thao",
+    "tagline": "Phong cách vận động mỗi ngày",
+    "image": "https://images.pexels.com/photos/7894390/pexels-photo-7894390.jpeg?auto=compress&cs=tinysrgb&w=750",
+    "fallbackImage": "assets/img/categories/thoi-trang-the-thao.svg"
+  },
+  {
+    "slug": "giay-the-thao",
+    "name": "Giày thể thao",
+    "tagline": "Êm chân trên mọi hành trình",
+    "image": "https://images.pexels.com/photos/1464624/pexels-photo-1464624.jpeg?auto=compress&cs=tinysrgb&w=750",
+    "fallbackImage": "assets/img/categories/giay-the-thao.svg"
+  },
+  {
+    "slug": "gym-fitness",
+    "name": "Gym & Fitness",
+    "tagline": "Trang bị để vượt giới hạn",
+    "image": "https://images.pexels.com/photos/8033017/pexels-photo-8033017.jpeg?auto=compress&cs=tinysrgb&w=750",
+    "fallbackImage": "assets/img/categories/gym-fitness.svg"
+  },
+  {
+    "slug": "pickleball",
+    "name": "Pickleball",
+    "tagline": "Nhịp chơi mới, năng lượng mới",
+    "image": "https://images.pexels.com/photos/38208389/pexels-photo-38208389.jpeg?auto=compress&cs=tinysrgb&w=750",
+    "fallbackImage": "assets/img/categories/pickleball.svg"
+  },
+  {
+    "slug": "cau-long",
+    "name": "Cầu lông",
+    "tagline": "Linh hoạt trong từng cú đánh",
+    "image": "https://images.pexels.com/photos/13701956/pexels-photo-13701956.jpeg?auto=compress&cs=tinysrgb&w=750",
+    "fallbackImage": "assets/img/categories/cau-long.svg"
+  },
+  {
+    "slug": "yoga-pilates",
+    "name": "Yoga & Pilates",
+    "tagline": "Cân bằng trong từng chuyển động",
+    "image": "https://images.pexels.com/photos/13347107/pexels-photo-13347107.jpeg?auto=compress&cs=tinysrgb&w=750",
+    "fallbackImage": "assets/img/categories/yoga-pilates.svg"
+  },
+  {
+    "slug": "phu-kien",
+    "name": "Phụ kiện thể thao",
+    "tagline": "Chi tiết nhỏ, hiệu quả lớn",
+    "image": "https://images.pexels.com/photos/5274796/pexels-photo-5274796.jpeg?auto=compress&cs=tinysrgb&w=750",
+    "fallbackImage": "assets/img/categories/phu-kien.svg"
+  },
+  {
+    "slug": "phuc-hoi",
+    "name": "Chăm sóc & phục hồi",
+    "tagline": "Thư giãn để tiếp tục bứt phá",
+    "image": "https://images.pexels.com/photos/19388383/pexels-photo-19388383.jpeg?auto=compress&cs=tinysrgb&w=750",
+    "fallbackImage": "assets/img/categories/phuc-hoi.svg"
+  }
+];

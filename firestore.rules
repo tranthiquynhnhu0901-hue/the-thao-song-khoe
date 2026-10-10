@@ -1,0 +1,29 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function logged() { return request.auth != null && request.auth.token.email_verified == true; }
+    function admin() { return logged() && request.auth.token.admin == true && request.auth.token.email == 'tranthiquynhnhu0901@gmail.com'; }
+    match /catalog/{id} { allow read: if true; allow write: if false; }
+    match /site/{id} { allow read: if id == 'settings'; allow write: if false; }
+    match /posts/{id} { allow read: if true; allow write: if false; }
+    match /orders/{id} { allow read: if admin() || (logged() && resource.data.userId == request.auth.uid); allow write: if false; }
+    match /users/{uid} {
+      allow read: if admin() || (logged() && request.auth.uid == uid);
+      allow create: if logged() && request.auth.uid == uid
+        && request.resource.data.uid == uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.keys().hasOnly(['uid','email','displayName','phone','address','favorites','createdAt'])
+        && request.resource.data.favorites is list;
+      allow update: if logged() && request.auth.uid == uid
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName','phone','address','favorites'])
+        && request.resource.data.favorites is list
+        && request.resource.data.favorites.size() <= 100;
+      allow delete: if false;
+    }
+    match /media/{id} { allow read: if admin(); allow write: if false; }
+    match /limits/{id} {allow read,write: if false;}
+    match /{path=**} { allow read,write: if false; }
+  }
+}

@@ -1,0 +1,12 @@
+node_modules/
+.firebase/
+.firebaserc
+.env
+.env.*
+*.log
+*.key
+*.pem
+*service-account*.json
+*serviceAccount*.json
+.DS_Store
+__pycache__/

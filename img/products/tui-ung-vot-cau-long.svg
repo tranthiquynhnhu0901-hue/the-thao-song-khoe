@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-label="Minh họa Túi đựng vợt cầu lông">
+ <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#EDF4F1"/><stop offset="1" stop-color="#D1EBE3"/></linearGradient><filter id="sh"><feGaussianBlur stdDeviation="22"/></filter></defs>
+ <rect width="720" height="720" fill="url(#bg)"/>
+ <circle cx="590" cy="133" r="230" fill="#F0734E" opacity=".12"/><circle cx="261" cy="596" r="196" fill="#fff" opacity=".35"/>
+ <path d="M-40 575 L800 140" stroke="#F0734E" stroke-width="85" opacity=".055"/>
+ <g opacity=".21" fill="none" stroke="#F0734E" stroke-width="3"><circle cx="573" cy="139" r="72"/><circle cx="573" cy="139" r="102"/><path d="M85 190 h125 M112 214 h82"/></g>
+ <ellipse cx="364" cy="565" rx="220" ry="38" fill="#1B2943" opacity=".20" filter="url(#sh)"/>
+ <g transform="rotate(0 360 360)"><path d="M238 284 Q238 200 358 200 Q478 200 478 284" fill="none" stroke="#1B2943" stroke-width="19" stroke-linecap="round" stroke-linejoin="round"/><rect x="187" y="280" width="344" height="240" rx="42" fill="#F0734E" stroke="#1B2943" stroke-width="9"/><rect x="247" y="343" width="226" height="117" rx="25" fill="#B8EE64" stroke="none" stroke-width="0"/><path d="M210 324 L511 324" fill="none" stroke="#EEF1FA" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M205 288 Q331 192 508 267" fill="none" stroke="#B8EE64" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>
+ <rect x="26" y="25" width="159" height="37" rx="18" fill="#172C4B"/><text x="105" y="49" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-size="15" font-weight="bold" letter-spacing="2">SPORTHUB</text>
+ <text x="35" y="670" fill="#1E2F46" font-size="24" font-family="Arial,sans-serif" font-weight="700">Túi đựng vợt cầu lông</text>
+ <text x="35" y="696" fill="#56657C" font-size="12" font-family="Arial,sans-serif" letter-spacing="2">MOVE MORE • FEEL BETTER</text>
+ </svg>
