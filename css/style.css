@@ -59,7 +59,7 @@ h3{font-size:20px}
 .logo-mark{width:43px;height:43px;border-radius:12px;background:var(--navy);color:var(--lime);display:grid;place-items:center;font-size:29px;font-weight:900;transform:skew(-7deg)}
 .logo-type{display:flex;flex-direction:column;line-height:1}
 
-/* Khôi phục các lớp giao diện gốc của SPORTHUB */
+/* Giao diện gốc SPORTHUB: header, điều hướng và banner */
 .logo-type b{font-size:24px;font-weight:900;letter-spacing:-.08em}
 .logo-type small{font-size:9px;font-weight:800;letter-spacing:.2em;margin-top:6px;color:#7a8ba0}
 .site-search{flex:1;position:relative;max-width:550px}
@@ -170,17 +170,24 @@ h3{font-size:20px}
 .page-intro h1{font-size:36px;margin:0 0 9px}
 .page-intro p{margin:0;color:var(--muted)}
 
+/* Máy tính: bộ lọc luôn ở trái, sản phẩm luôn ở phải */
 .shop-layout{
   display:grid;
   grid-template-columns:245px minmax(0,1fr);
   gap:29px;
   align-items:start;
 }
-.shop-layout>*{
+.shop-layout > .filters{
+  grid-column:1;
+  grid-row:1;
   min-width:0;
+  width:100%;
 }
-.shop-layout>.filters{
-  order:-1;
+.shop-layout > :not(.filters){
+  grid-column:2;
+  grid-row:1;
+  min-width:0;
+  width:100%;
 }
 
 .filters{border:1px solid var(--line);padding:24px 19px;border-radius:17px;background:#fff}
@@ -320,7 +327,6 @@ textarea.form-control{min-height:110px;resize:vertical}
 .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
 .spinner{display:inline-block;width:18px;height:18px;border:2px solid #fff5;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
 @media(max-width:1060px){
 .container{width:min(100% - 34px,1240px)}
 .header-inner{gap:16px}
@@ -370,7 +376,7 @@ textarea.form-control{min-height:110px;resize:vertical}
 .hero-art img{width:62%;height:260px;right:14%;top:3px}
 .hero-circle{top:-30px;right:7%;width:320px;height:320px}
 .hero-mini{left:5%;top:22px}
-.hero-seal{right:7%;bottom:18px}
+.hero-seal{right:7%;bottom:18px;font-size:11px}
 .trustbar{grid-template-columns:repeat(2,1fr);gap:14px}
 .trust-item small{font-size:10px}
 .trust-ico{height:35px;width:35px}
@@ -397,20 +403,20 @@ textarea.form-control{min-height:110px;resize:vertical}
 .footer-bottom{display:block}
 .footer-bottom span{display:block;margin:6px 0}
 
+/* Điện thoại: bộ lọc ở trên, sản phẩm bên dưới */
 .shop-layout{
-  display:flex;
-  flex-direction:column;
-  gap:0;
+  grid-template-columns:minmax(0,1fr);
+  gap:20px;
 }
-.shop-layout>.filters{
-  order:-1;
-  width:100%;
-  margin-bottom:20px;
+.shop-layout > .filters{
+  grid-column:1;
+  grid-row:1;
+  margin-bottom:0;
   padding:17px;
 }
-.shop-layout>:not(.filters){
-  width:100%;
-  min-width:0;
+.shop-layout > :not(.filters){
+  grid-column:1;
+  grid-row:2;
 }
 
 .shop-toolbar{font-size:12px}
@@ -452,4 +458,17 @@ textarea.form-control{min-height:110px;resize:vertical}
 .logo-type b{font-size:19px}
 .header-actions{gap:3px}
 .detail-ctas{flex-direction:column}
+}
+
+/* Số cột sản phẩm phù hợp với diện tích còn lại */
+@media (min-width:901px) and (max-width:1180px){
+  .shop-layout .product-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+
+@media (min-width:761px) and (max-width:900px){
+  .shop-layout .product-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
 }
