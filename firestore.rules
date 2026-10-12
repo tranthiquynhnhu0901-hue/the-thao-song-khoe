@@ -1,135 +1,29 @@
-
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    function logged() {
-      return request.auth != null
-        && request.auth.token.email_verified == true;
-    }
-
-    function admin() {
-      return logged()
-        && request.auth.token.admin == true
-        && request.auth.token.email == 'tranthiquynhnhu0901@gmail.com';
-    }
-
-    // Validate customer profile fields used by SPORTHUB V1.
-    function validProfile() {
-      return request.resource.data.displayName is string
-        && request.resource.data.displayName.size() <= 100
-        && request.resource.data.phone is string
-        && request.resource.data.phone.size() <= 20
-        && request.resource.data.address is string
-        && request.resource.data.address.size() <= 260;
-    }
-
-    // Keep favorites bounded on both account creation and updates.
-    function validFavorites() {
-      return request.resource.data.favorites is list
-        && request.resource.data.favorites.size() <= 100;
-    }
-
-    match /catalog/{id} {
-      allow read: if true;
-      allow write: if false;
-    }
-
-    match /site/{id} {
-      allow read: if id == 'settings';
-      allow write: if false;
-    }
-
-    match /posts/{id} {
-      allow read: if true;
-      allow write: if false;
-    }
-
-    match /orders/{id} {
-      allow read: if admin()
-        || (
-          logged()
-          && resource.data.userId == request.auth.uid
-        );
-
-      allow write: if false;
-    }
-
+    function logged() { return request.auth != null && request.auth.token.email_verified == true; }
+    function admin() { return logged() && request.auth.token.admin == true && request.auth.token.email == 'tranthiquynhnhu0901@gmail.com'; }
+    match /catalog/{id} { allow read: if true; allow write: if false; }
+    match /site/{id} { allow read: if id == 'settings'; allow write: if false; }
+    match /posts/{id} { allow read: if true; allow write: if false; }
+    match /orders/{id} { allow read: if admin() || (logged() && resource.data.userId == request.auth.uid); allow write: if false; }
     match /users/{uid} {
-
-      // Account owners can read their own profile.
-      // Verified admins can read customer profiles.
-      allow read: if admin()
-        || (
-          logged()
-          && request.auth.uid == uid
-        );
-
-      // Create only an authenticated user's own profile.
-      allow create: if logged()
-        && request.auth.uid == uid
+      allow read: if admin() || (logged() && request.auth.uid == uid);
+      allow create: if logged() && request.auth.uid == uid
         && request.resource.data.uid == uid
         && request.resource.data.email == request.auth.token.email
-
-        && request.resource.data.keys().hasOnly([
-          'uid',
-          'email',
-          'displayName',
-          'phone',
-          'address',
-          'favorites',
-          'createdAt'
-        ])
-
-        && request.resource.data.keys().hasAll([
-          'uid',
-          'email',
-          'displayName',
-          'phone',
-          'address',
-          'favorites',
-          'createdAt'
-        ])
-
-        && request.resource.data.createdAt is timestamp
-        && validProfile()
-        && validFavorites();
-
-      // Owners may update profile and favorites only.
-      // UID, email and createdAt remain immutable.
-      allow update: if logged()
-        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['uid','email','displayName','phone','address','favorites','createdAt'])
+        && request.resource.data.favorites is list;
+      allow update: if logged() && request.auth.uid == uid
         && request.resource.data.uid == resource.data.uid
         && request.resource.data.email == resource.data.email
-
-        && request.resource.data.diff(
-          resource.data
-        ).affectedKeys().hasOnly([
-          'displayName',
-          'phone',
-          'address',
-          'favorites'
-        ])
-
-        && validProfile()
-        && validFavorites();
-
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['displayName','phone','address','favorites'])
+        && request.resource.data.favorites is list
+        && request.resource.data.favorites.size() <= 100;
       allow delete: if false;
     }
-
-    match /media/{id} {
-      allow read: if admin();
-      allow write: if false;
-    }
-
-    match /limits/{id} {
-      allow read, write: if false;
-    }
-
-    // Deny everything not explicitly authorized above.
-    match /{path=**} {
-      allow read, write: if false;
-    }
+    match /media/{id} { allow read: if admin(); allow write: if false; }
+    match /limits/{id} {allow read,write: if false;}
+    match /{path=**} { allow read,write: if false; }
   }
 }
