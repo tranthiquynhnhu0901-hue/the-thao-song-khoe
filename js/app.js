@@ -20,6 +20,17 @@ const page = document.body.dataset.page || 'home';
 const slug = document.body.dataset.slug || '';
 const cfg = window.SPORT_CONFIG || {};
 
+// Browser-only demo accounts. Never use demo sessions for Firebase or admin access.
+const DEMO_AUTH = !Boolean(
+  cfg.firebase?.apiKey && cfg.firebase?.projectId && cfg.firebase?.appId
+);
+const DEMO_ACCOUNTS_KEY = 'sporthub-demo-accounts-v1';
+const DEMO_SESSION_KEY = 'sporthub-demo-session-v1';
+let demoAccounts = DEMO_AUTH ? safeParse(DEMO_ACCOUNTS_KEY, []) : [];
+if(!Array.isArray(demoAccounts)) demoAccounts = [];
+let demoAuthMode = 'login';
+let demoLoginEmail = '';
+
 let products = [...(window.SPORT_PRODUCTS || [])];
 const categories = window.SPORT_CATEGORIES || [];
 
@@ -45,7 +56,7 @@ let cart = safeParse('sporthub-cart', []);
 let favorites = safeParse('sporthub-wish', []);
 
 let fb = null,
-    user = null,
+    user = DEMO_AUTH ? currentDemoUser() : null,
     isAdmin = false,
     authReady = false,
     adminTab = 'dashboard',
@@ -127,6 +138,143 @@ function store(key,data){
   }catch{}
 }
 
+function currentDemoUser(){
+  if(!DEMO_AUTH) return null;
+  const email = safeParse(DEMO_SESSION_KEY, '');
+  if(typeof email !== 'string') return null;
+  const record = demoAccounts.find(a => a?.email === email);
+  return record ? {
+    uid:'demo:'+record.email,
+    email:record.email,
+    displayName:record.displayName,
+    _phone:record.phone || '',
+    _address:record.address || '',
+    _isDemo:true
+  } : null;
+}
+
+function saveDemoAccounts(){
+  // Fail visibly when private browsing or storage settings block persistence.
+  localStorage.setItem(DEMO_ACCOUNTS_KEY, JSON.stringify(demoAccounts));
+}
+
+function demoAccount(email){
+  return demoAccounts.find(a => a?.email === email);
+}
+
+// A local-only demo PIN, not a website password or a secure login method.
+// Store a salted derived value, never the entered PIN itself.
+async function demoPinHash(pin, salt){
+  if(!globalThis.crypto?.subtle || !globalThis.TextEncoder){
+    throw new Error('Trình duyệt chưa hỗ trợ tạo mã PIN mẫu an toàn. Hãy dùng HTTPS.');
+  }
+  const secret = await crypto.subtle.importKey(
+    'raw', new TextEncoder().encode(pin), 'PBKDF2', false, ['deriveBits']
+  );
+  const saltBytes = Uint8Array.from(salt.match(/../g), h => parseInt(h,16));
+  const hash = await crypto.subtle.deriveBits({
+    name:'PBKDF2',salt:saltBytes,iterations:120000,hash:'SHA-256'
+  },secret,256);
+  return Array.from(new Uint8Array(hash),b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+function demoSalt(){
+  if(!globalThis.crypto?.getRandomValues){
+    throw new Error('Trình duyệt không hỗ trợ tạo mã PIN mẫu.');
+  }
+  return Array.from(crypto.getRandomValues(new Uint8Array(16)),
+    b=>b.toString(16).padStart(2,'0')).join('');
+}
+
+async function registerDemo(form){
+  if(!DEMO_AUTH) return;
+  const data = new FormData(form);
+  const displayName = String(data.get('displayName')||'').trim().replace(/\s+/g,' ');
+  const email = String(data.get('email')||'').trim().toLowerCase();
+  const pin = String(data.get('pin')||'');
+  const confirmation = String(data.get('confirmPin')||'');
+
+  if(displayName.length < 2 || displayName.length > 80){
+    return notify('Họ tên mẫu cần từ 2 đến 80 ký tự.','error');
+  }
+  if(email.length > 120 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+    return notify('Vui lòng nhập email mẫu đúng định dạng.','error');
+  }
+  if(!/^[0-9]{6}$/.test(pin)){
+    return notify('Mã PIN mẫu phải có đúng 6 chữ số.','error');
+  }
+  if(pin !== confirmation){
+    return notify('Hai mã PIN mẫu chưa trùng nhau.','error');
+  }
+  if(demoAccount(email)){
+    return notify('Email mẫu này đã có hồ sơ trên thiết bị. Hãy đăng nhập.','error');
+  }
+
+  try{
+    const salt = demoSalt();
+    const pinHash = await demoPinHash(pin,salt);
+    const record = {email,displayName,phone:'',address:'',salt,pinHash};
+    demoAccounts.push(record);
+    try{
+      saveDemoAccounts();
+    }catch(err){
+      demoAccounts.pop();
+      throw err;
+    }
+    demoLoginEmail = email;
+    demoAuthMode = 'login';
+    form.reset();
+    render();
+    notify('Đã tạo hồ sơ mẫu trên trình duyệt này. Hãy đăng nhập bằng PIN mẫu.','success');
+  }catch(err){
+    notify('Không thể lưu tài khoản mẫu: '+err.message,'error');
+  }
+}
+
+async function loginDemo(form){
+  if(!DEMO_AUTH) return;
+  const data = new FormData(form);
+  const email = String(data.get('email')||'').trim().toLowerCase();
+  const pin = String(data.get('pin')||'');
+  const record = demoAccount(email);
+  if(!record || !/^[0-9]{6}$/.test(pin)){
+    return notify('Email hoặc mã PIN mẫu không đúng.','error');
+  }
+  try{
+    if(await demoPinHash(pin,record.salt) !== record.pinHash){
+      return notify('Email hoặc mã PIN mẫu không đúng.','error');
+    }
+    localStorage.setItem(DEMO_SESSION_KEY,JSON.stringify(email));
+    user = currentDemoUser();
+    location.href = link('tai-khoan');
+  }catch(err){
+    notify('Không thể đăng nhập mẫu: '+err.message,'error');
+  }
+}
+
+function saveDemoProfile(data){
+  const record = demoAccount(user?.email);
+  if(!record) throw new Error('Không tìm thấy hồ sơ mẫu.');
+  const displayName = String(data.get('displayName')||'').trim().replace(/\s+/g,' ');
+  if(displayName.length < 2 || displayName.length > 80){
+    throw new Error('Họ tên mẫu cần từ 2 đến 80 ký tự.');
+  }
+  const phone = String(data.get('phone')||'').trim();
+  const address = String(data.get('address')||'').trim();
+  if(phone.length > 20 || address.length > 260){
+    throw new Error('Số điện thoại hoặc địa chỉ quá dài.');
+  }
+  const original = {...record};
+  Object.assign(record,{displayName,phone,address});
+  try{
+    saveDemoAccounts();
+  }catch(err){
+    Object.assign(record,original);
+    throw err;
+  }
+  user = currentDemoUser();
+}
+
 function escapeHTML(v){
   return String(v??'').replace(
     /[&<>"']/g,
@@ -139,7 +287,6 @@ function escapeHTML(v){
     }[c])
   );
 }
-
 function money(n){
   return Number(n||0).toLocaleString('vi-VN')+'₫';
 }
@@ -347,7 +494,7 @@ function updateCartBadge(){
 function wishSync(){
   store('sporthub-wish',favorites);
 
-  if(fb&&user){
+  if(fb&&user&&!user._isDemo){
     fb.setDoc(
       fb.doc(fb.db,'users',user.uid),
       {favorites},
@@ -810,11 +957,91 @@ function blog(){return `<main>${crumb([{text:'Kiến thức thể thao'}])}<div 
 function mergedPosts(){return [...posts.map(p=>adminPosts.find(a=>a.slug===p.slug)?{...p,...adminPosts.find(a=>a.slug===p.slug)}:p),...adminPosts.filter(p=>!posts.some(x=>x.slug===p.slug))].filter(p=>p.published!==false)}
 function article(){const p=mergedPosts().find(x=>x.slug===(slug||new URLSearchParams(location.search).get('p')));if(!p)return notFound();return `<main>${crumb([{text:'Kiến thức thể thao',href:link('bai-viet')},{text:p.title}])}<section class="section sm"><div class="container article-layout"><article class="article-content"><div class="eyebrow">${escapeHTML(p.category||'Kiến thức')} • ${escapeHTML(p.date||'')}</div><h1>${escapeHTML(p.title)}</h1><p style="font-size:17px;font-weight:700">${escapeHTML(p.intro)}</p><img class="article-cover" src="${asset(p.image)}" alt="${escapeHTML(p.title)}"/>${(Array.isArray(p.content)?p.content:[]).map((v,i)=>`<h2>${['Bắt đầu từ điều cơ bản','Duy trì thói quen phù hợp','Lắng nghe cơ thể'][i]||'Gợi ý dành cho bạn'}</h2><p>${escapeHTML(v)}</p>`).join('')}<div class="notice">Bài viết mang tính chia sẻ kiến thức chung, không thay thế lời khuyên từ chuyên gia.</div><a class="link-arrow" href="${link('bai-viet')}">← Trở lại bài viết</a></article><aside><div class="panel"><h3>Bài viết khác</h3>${mergedPosts().filter(x=>x.slug!==slug).map(x=>`<p><a href="${articleLink(x)}"><b>${escapeHTML(x.title)} ↗</b></a></p>`).join('')}</div></aside></div></section></main>`}
 function policy(type){const privacy=type==='privacy';return `<main>${crumb([{text:privacy?'Bảo mật & điều khoản':'Chính sách mua hàng'}])}<div class="page-intro"><div class="container"><h1>${privacy?'Chính sách bảo mật & điều khoản':'Chính sách mua hàng'}</h1><p>Nguyên tắc minh bạch để bạn yên tâm khi sử dụng SPORTHUB.</p></div></div><section class="section"><div class="container static-copy">${privacy?`<h2>1. Thông tin thu thập</h2><p>Khi bạn đăng nhập Google và mua hàng (sau khi hệ thống được kết nối), SPORTHUB chỉ cần thông tin tài khoản, địa chỉ giao hàng, số điện thoại và dữ liệu đơn hàng để xử lý việc bán hàng. Không thu thập dữ liệu sức khỏe cá nhân.</p><h2>2. Mục đích sử dụng</h2><p>Dữ liệu được sử dụng để xác thực tài khoản, giao hàng, hỗ trợ và quản lý đơn hàng. CRM tổng thể chỉ cấp quyền cho quản trị viên đã được xác minh.</p><h2>3. Bảo vệ dữ liệu</h2><p>Hệ thống sử dụng quyền truy cập của backend và quy tắc cơ sở dữ liệu. Không lưu mật khẩu Google trong website. Dữ liệu quan trọng không đặt trong repository GitHub.</p><h2>4. Quyền của người sử dụng</h2><p>Bạn có thể yêu cầu chủ cửa hàng cập nhật hoặc xóa dữ liệu theo các quy định áp dụng. Thông tin liên hệ sẽ được hiển thị khi website chính thức vận hành.</p><h2>5. Điều khoản</h2><p>Danh mục và giá hiện tại mang tính minh họa. Mọi hoạt động thương mại chính thức sẽ tuân theo điều khoản đã công bố và xác nhận đơn hàng hợp lệ trên máy chủ.</p>`:`<h2>1. Đặt hàng</h2><p>Khách hàng chọn sản phẩm, nhập thông tin nhận hàng và xác nhận đặt hàng. Sau khi chủ website kích hoạt backend, hệ thống mới tiếp nhận đơn hàng và đối chiếu giá, tồn kho tại máy chủ.</p><h2>2. Thanh toán</h2><p>Hỗ trợ thanh toán khi nhận hàng (COD) và chuyển khoản khi chủ cửa hàng đã cấu hình thông tin ngân hàng. Việc đặt đơn không đồng nghĩa giao dịch chuyển khoản đã được thanh toán; trạng thái thanh toán được xác nhận riêng sau đối soát.</p><h2>3. Vận chuyển</h2><p>Mức phí mẫu trong giao diện là ${money(settings.shippingFee)} và miễn phí từ ${money(settings.freeShippingFrom)}. Phí giao thực tế, thời gian giao dự kiến và khu vực vận chuyển sẽ được cập nhật khi chính thức hoạt động.</p><h2>4. Đổi trả và bảo hành</h2><p>Điều kiện đổi trả, thời hạn tiếp nhận và phạm vi bảo hành cần được chủ cửa hàng công bố chính thức theo từng dòng sản phẩm trước khi mở bán. Liên hệ bộ phận hỗ trợ để được xác nhận thông tin cụ thể.</p><h2>5. Thông tin sản phẩm</h2><p>Hình ảnh và giá hiện là thông tin mẫu. SPORTHUB khuyến nghị khách hàng xác nhận chất liệu, kích thước và thông số khi sản phẩm thực tế được công bố.</p>`}</div></section></main>`}
-function signIn(){return `<main>${crumb([{text:'Đăng nhập'}])}<div class="container auth-container"><div class="auth-card"><div class="logo-mark" style="margin:0 auto 20px">S</div><h1>${user?'Đã đăng nhập':'Chào mừng trở lại'}</h1><p class="muted">${user?'Bạn đang sử dụng tài khoản '+escapeHTML(user.email):'Đây là giao diện tài khoản mẫu. Chức năng đăng nhập chỉ hoạt động sau khi chủ website kích hoạt Google Authentication.'}</p>${!fb?'<div class="notice warning">Chưa kết nối Firebase. Cần điền cấu hình trong <b>js/site-config.js</b> và thiết lập Google Authentication.</div>':user?`<a class="btn block" href="${link('tai-khoan')}">Đến tài khoản của tôi</a><button class="btn outline block space-top" data-action="logout">Đăng xuất</button>`:`<button class="google-btn space-top" data-action="google"><span class="google-g">G</span> Tiếp tục với Google</button>`}<p class="text-small muted space-top">Bằng cách đăng nhập, bạn đồng ý với <a class="text-blue" href="${link('bao-mat')}">điều khoản và chính sách bảo mật</a>.</p></div></div></main>`}
-function account(){if(!user)return `<main>${crumb([{text:'Tài khoản'}])}<section class="section container"><div class="auth-container auth-card"><h1>Tài khoản của tôi</h1><p class="muted">Đây là giao diện tài khoản mẫu. Đăng nhập và quản lý đơn hàng chưa khả dụng nếu dịch vụ chưa được kích hoạt.</p><a class="btn" href="${link('dang-nhap')}">Đăng nhập Google ${icon('arrow')}</a>${!fb?'<div class="notice warning">Chưa kết nối dịch vụ đăng nhập thực tế.</div>':''}</div></section></main>`;const tabNames={orders:'Đơn hàng của tôi',profile:'Thông tin cá nhân',favorites:'Yêu thích'};return `<main>${crumb([{text:'Tài khoản của tôi'}])}<div class="page-intro"><div class="container"><h1>Xin chào, ${escapeHTML(user.displayName||'bạn')} 👋</h1><p>Quản lý thông tin của bạn cùng SPORTHUB.</p></div></div><section class="section sm"><div class="container account-grid"><aside class="side-nav">${Object.entries(tabNames).map(([k,v])=>`<button class="${accountTab===k?'active':''}" data-action="account-tab" data-tab="${k}">${escapeHTML(v)}</button>`).join('')}${isAdmin?`<a href="${link('quan-tri')}">Quản trị website ↗</a>`:''}<button data-action="logout">Đăng xuất</button></aside><div class="panel" id="account-content">${accountContent()}</div></div></section></main>`}
-function accountContent(){if(accountTab==='favorites'){const items=products.filter(p=>favorites.includes(p.id));return `<h3>Danh sách yêu thích (${items.length})</h3>${items.length?productGrid(items):'<div class="empty"><p>Chưa có sản phẩm yêu thích.</p><a class="btn" href="'+link('san-pham')+'">Khám phá sản phẩm</a></div>'}`}
-if(accountTab==='profile')return `<h3>Thông tin cá nhân</h3><p class="muted">Email xác thực: <b>${escapeHTML(user.email)}</b></p><form id="profile-form"><div class="field"><label>Họ và tên</label><input class="form-control" name="displayName" value="${escapeHTML(user.displayName||'')}" required maxlength="100"/></div><div class="field"><label>Số điện thoại (không bắt buộc)</label><input class="form-control" name="phone" value="${escapeHTML(user._phone||'')}" maxlength="20"/></div><div class="field"><label>Địa chỉ mặc định</label><textarea name="address" class="form-control" maxlength="260">${escapeHTML(user._address||'')}</textarea></div><button class="btn">Lưu thông tin</button></form>`;
-return `<h3>Đơn hàng của tôi</h3><div id="my-orders"><p class="muted">${fb?'Đang kiểm tra đơn hàng...':'Không có dữ liệu đơn hàng khi chưa kết nối.'}</p></div>`}
+function signIn(){
+  if(DEMO_AUTH){
+    const loggedIn = Boolean(user?._isDemo);
+    const registering = demoAuthMode === 'register';
+    return `<main>${crumb([{text:'Đăng nhập tài khoản mẫu'}])}
+      <div class="container auth-container">
+        <div class="auth-card">
+          <div class="logo-mark" style="margin:0 auto 20px">S</div>
+          <h1>${loggedIn?'Đã đăng nhập mẫu':registering?'Tạo tài khoản mẫu':'Đăng nhập mẫu'}</h1>
+          <p class="muted">Đây là giao diện tài khoản mẫu chạy trên trình duyệt, không phải đăng nhập thật hay Google.</p>
+          <div class="notice warning" style="text-align:left;margin:14px 0">
+            Chỉ dùng tên, email và <b>mã PIN giả 6 số</b> để thử. Không dùng mật khẩu, PIN ngân hàng hoặc thông tin cá nhân thật.
+            Dữ liệu mẫu lưu trên thiết bị này; không xác minh email và không cấp quyền đặt hàng hay quản trị.
+          </div>
+          ${loggedIn?`
+            <p class="muted">Bạn đang dùng hồ sơ mẫu: <b>${escapeHTML(user.displayName)}</b> (${escapeHTML(user.email)}).</p>
+            <a class="btn block" href="${link('tai-khoan')}">Xem tài khoản mẫu ${icon('arrow',17)}</a>
+            <button class="btn outline block space-top" data-action="logout">Đăng xuất mẫu</button>
+          `:registering?`
+            <form id="demo-register-form">
+              <div class="field"><label for="demo-name">Họ tên mẫu *</label><input id="demo-name" class="form-control" name="displayName" required minlength="2" maxlength="80" autocomplete="off" placeholder="Ví dụ: Khách Hàng Mẫu"></div>
+              <div class="field"><label for="demo-register-email">Email mẫu *</label><input id="demo-register-email" class="form-control" name="email" type="email" maxlength="120" required autocomplete="off" placeholder="mau@example.com"></div>
+              <div class="field"><label for="demo-register-pin">Mã PIN mẫu (6 chữ số) *</label><input id="demo-register-pin" class="form-control" name="pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" required placeholder="Không dùng PIN thật"></div>
+              <div class="field"><label for="demo-confirm-pin">Nhập lại PIN mẫu *</label><input id="demo-confirm-pin" class="form-control" name="confirmPin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" required></div>
+              <button class="btn block space-top" type="submit">Tạo tài khoản mẫu ${icon('arrow',17)}</button>
+            </form>
+            <p class="text-small muted space-top">Đã có tài khoản mẫu? <button class="btn ghost sm" type="button" data-action="demo-mode" data-mode="login">Đăng nhập</button></p>
+          `:`
+            <form id="demo-login-form">
+              <div class="field"><label for="demo-login-email">Email mẫu *</label><input id="demo-login-email" class="form-control" name="email" type="email" maxlength="120" required autocomplete="off" value="${escapeHTML(demoLoginEmail)}" placeholder="mau@example.com"></div>
+              <div class="field"><label for="demo-login-pin">Mã PIN mẫu (6 chữ số) *</label><input id="demo-login-pin" class="form-control" name="pin" type="password" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" required autocomplete="off" placeholder="PIN giả khi tạo tài khoản"></div>
+              <button class="btn block space-top" type="submit">Đăng nhập mẫu ${icon('arrow',17)}</button>
+            </form>
+            <p class="text-small muted space-top">Chưa có tài khoản mẫu? <button class="btn ghost sm" type="button" data-action="demo-mode" data-mode="register">Tạo tài khoản</button></p>
+          `}
+          <p class="text-small muted space-top">Bạn có thể xóa tài khoản mẫu trong trang cá nhân. Đây là chế độ thử nghiệm, không gửi dữ liệu đăng ký lên máy chủ.</p>
+        </div>
+      </div>
+    </main>`;
+  }
+  return `<main>${crumb([{text:'Đăng nhập'}])}<div class="container auth-container"><div class="auth-card"><div class="logo-mark" style="margin:0 auto 20px">S</div><h1>${user?'Đã đăng nhập':'Chào mừng trở lại'}</h1><p class="muted">${user?'Bạn đang sử dụng tài khoản '+escapeHTML(user.email):'Đăng nhập Google sẽ hoạt động khi hệ thống xác thực được kết nối.'}</p>${!fb?'<div class="notice warning">Chưa kết nối Firebase. Vui lòng kiểm tra cấu hình.</div>':user?`<a class="btn block" href="${link('tai-khoan')}">Đến tài khoản của tôi</a><button class="btn outline block space-top" data-action="logout">Đăng xuất</button>`:`<button class="google-btn space-top" data-action="google"><span class="google-g">G</span> Tiếp tục với Google</button>`}<p class="text-small muted space-top">Bằng cách đăng nhập, bạn đồng ý với <a class="text-blue" href="${link('bao-mat')}">điều khoản và chính sách bảo mật</a>.</p></div></div></main>`;
+}
+
+function account(){
+  if(!user) return `<main>${crumb([{text:'Tài khoản'}])}
+    <section class="section container"><div class="auth-container auth-card">
+      <h1>Tài khoản của tôi</h1>
+      <p class="muted">${DEMO_AUTH?'Bạn có thể tạo tài khoản mẫu và đăng nhập trên trình duyệt này.':'Đăng nhập Google để quản lý tài khoản khi Firebase được kích hoạt.'}</p>
+      <a class="btn" href="${link('dang-nhap')}">${DEMO_AUTH?'Tạo tài khoản hoặc đăng nhập mẫu':'Đăng nhập Google'} ${icon('arrow')}</a>
+      ${DEMO_AUTH?'<div class="notice warning space-top">Đây là giao diện tài khoản mẫu, không có đơn hàng hay xác thực thật.</div>':''}
+    </div></section></main>`;
+
+  const tabNames = {orders:'Đơn hàng của tôi',profile:'Thông tin cá nhân',favorites:'Yêu thích'};
+  return `<main>${crumb([{text:'Tài khoản của tôi'}])}
+    <div class="page-intro"><div class="container"><h1>Xin chào, ${escapeHTML(user.displayName||'bạn')} 👋</h1><p>Quản lý thông tin của bạn cùng SPORTHUB.</p></div></div>
+    <section class="section sm"><div class="container account-grid">
+      <aside class="side-nav">
+        ${Object.entries(tabNames).map(([k,v])=>`<button class="${accountTab===k?'active':''}" data-action="account-tab" data-tab="${k}">${escapeHTML(v)}</button>`).join('')}
+        ${isAdmin?`<a href="${link('quan-tri')}">Quản trị website ↗</a>`:''}
+        <button data-action="logout">Đăng xuất${user._isDemo?' mẫu':''}</button>
+      </aside>
+      <div class="panel" id="account-content">${user._isDemo?'<div class="notice warning">TÀI KHOẢN MẪU: dữ liệu chỉ lưu trên trình duyệt này, không xác thực email, không dùng để đặt hàng hoặc quản trị.</div>':''}${accountContent()}</div>
+    </div></section>
+  </main>`;
+}
+
+function accountContent(){
+  if(accountTab==='favorites'){
+    const items=products.filter(p=>favorites.includes(p.id));
+    return `<h3>Danh sách yêu thích (${items.length})</h3>${items.length?productGrid(items):'<div class="empty"><p>Chưa có sản phẩm yêu thích.</p><a class="btn" href="'+link('san-pham')+'">Khám phá sản phẩm</a></div>'}${user?._isDemo?'<p class="muted text-small">Danh sách yêu thích được lưu trên trình duyệt này, không đồng bộ lên máy chủ.</p>':''}`;
+  }
+  if(accountTab==='profile') return `<h3>Thông tin cá nhân${user?._isDemo?' (mẫu)':''}</h3>
+    <p class="muted">${user?._isDemo?'Email mẫu, chưa xác minh':'Email xác thực'}: <b>${escapeHTML(user.email)}</b></p>
+    <form id="profile-form">
+      <div class="field"><label>Họ và tên</label><input class="form-control" name="displayName" value="${escapeHTML(user.displayName||'')}" required maxlength="80"/></div>
+      <div class="field"><label>Số điện thoại (không bắt buộc)</label><input class="form-control" name="phone" value="${escapeHTML(user._phone||'')}" maxlength="20"/></div>
+      <div class="field"><label>Địa chỉ mặc định</label><textarea name="address" class="form-control" maxlength="260">${escapeHTML(user._address||'')}</textarea></div>
+      <button class="btn">Lưu thông tin${user?._isDemo?' mẫu':''}</button>
+    </form>
+    ${user?._isDemo?'<button class="btn outline sm space-top" data-action="demo-delete">Xóa tài khoản mẫu trên thiết bị này</button>':''}`;
+  return user?._isDemo
+    ? '<h3>Đơn hàng của tôi</h3><div class="empty"><p>Tài khoản mẫu không có đơn hàng thật. Chức năng đặt hàng cần kết nối backend an toàn.</p><a class="btn" href="'+link('san-pham')+'">Xem sản phẩm</a></div>'
+    : `<h3>Đơn hàng của tôi</h3><div id="my-orders"><p class="muted">${fb?'Đang kiểm tra đơn hàng...':'Không có dữ liệu đơn hàng khi chưa kết nối.'}</p></div>`;
+}
+
 function notFound(){return `<main><section class="section"><div class="container empty"><div class="emoji">404</div><h1>Không tìm thấy trang</h1><p>Nội dung bạn tìm kiếm chưa tồn tại hoặc đã thay đổi.</p><a class="btn" href="${link()}">Về trang chủ ${icon('arrow')}</a></div></section></main>`}
 
 function render(){
@@ -1203,6 +1430,13 @@ async function loginGoogle(){
 }
 
 async function logout(){
+  if(user?._isDemo){
+    try{ localStorage.removeItem(DEMO_SESSION_KEY); }
+    catch(err){ return notify('Không thể đăng xuất mẫu: '+err.message,'error'); }
+    user=null;
+    location.href=link('dang-nhap');
+    return;
+  }
   if(fb){
     await fb.signOut(fb.auth);
     location.href=link();
@@ -1254,7 +1488,7 @@ async function loadMyOrders(){
 }
 
 async function call(name,payload){
-  if(!fb||!user){
+  if(!fb||!user||user._isDemo){
     throw new Error('Chưa kết nối hoặc chưa đăng nhập');
   }
 
@@ -1263,7 +1497,7 @@ async function call(name,payload){
 }
 
 async function submitOrder(form){
-  if(!fb||!user){
+  if(!fb||!user||user._isDemo){
     return notify('Cần đăng nhập và kết nối backend.','error');
   }
 
@@ -1348,7 +1582,6 @@ function adminGate(){
   if(demoAdmin)return 'demo';
   return 'locked';
 }
-
 function adminPage(){
   const gate=adminGate();
 
@@ -1727,6 +1960,26 @@ document.addEventListener('click',async e=>{
     loginGoogle();
   }
 
+  if(a==='demo-mode' && DEMO_AUTH){
+    demoAuthMode=b.dataset.mode==='register'?'register':'login';
+    render();
+  }
+
+  if(a==='demo-delete' && user?._isDemo){
+    if(!confirm('Xóa vĩnh viễn hồ sơ mẫu này trên trình duyệt? Thao tác không xóa giỏ hàng và danh sách yêu thích.')) return;
+    const oldAccounts=demoAccounts;
+    demoAccounts=demoAccounts.filter(x=>x.email!==user.email);
+    try{
+      saveDemoAccounts();
+      localStorage.removeItem(DEMO_SESSION_KEY);
+      user=null;
+      location.href=link('dang-nhap');
+    }catch(err){
+      demoAccounts=oldAccounts;
+      notify('Không thể xóa tài khoản mẫu: '+err.message,'error');
+    }
+  }
+
   if(a==='logout'){
     logout();
   }
@@ -1933,7 +2186,6 @@ document.addEventListener('click',async e=>{
     }
   }
 });
-
 // Form submission handlers.
 document.addEventListener('submit',async e=>{
   const form=e.target;
@@ -1949,6 +2201,18 @@ document.addEventListener('submit',async e=>{
       '?q='+
       encodeURIComponent(q||'');
 
+    return;
+  }
+
+  if(form.id==='demo-register-form' && DEMO_AUTH){
+    e.preventDefault();
+    await registerDemo(form);
+    return;
+  }
+
+  if(form.id==='demo-login-form' && DEMO_AUTH){
+    e.preventDefault();
+    await loginDemo(form);
     return;
   }
 
@@ -1987,6 +2251,17 @@ document.addEventListener('submit',async e=>{
 
   if(form.id==='profile-form'){
     e.preventDefault();
+
+    if(user?._isDemo){
+      try{
+        saveDemoProfile(new FormData(form));
+        render();
+        notify('Đã lưu hồ sơ mẫu trên trình duyệt.','success');
+      }catch(err){
+        notify('Không lưu được hồ sơ mẫu: '+err.message,'error');
+      }
+      return;
+    }
 
     if(!fb||!user)return;
 
