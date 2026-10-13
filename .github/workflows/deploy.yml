@@ -1,0 +1,129 @@
+name: Build and deploy SPORTHUB
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Build routes, prerender content and enhance SEO
+        run: python scripts/build-pages.py --base "https://tranthiquynhnhu0901-hue.github.io/the-thao-song-khoe/"
+
+      - name: Run offline smoke tests
+        run: node scripts/smoke-test.mjs
+
+      - name: Prepare public website only
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from shutil import copy2, copytree
+
+          root = Path.cwd()
+          destination = root / '_site'
+          destination.mkdir(exist_ok=True)
+
+          files = (
+              'index.html',
+              '404.html',
+              'robots.txt',
+              'sitemap.xml',
+          )
+
+          folders = (
+              'css',
+              'js',
+              'img',
+              'san-pham',
+              'danh-muc',
+              'gio-hang',
+              'thanh-toan',
+              'gioi-thieu',
+              'lien-he',
+              'bai-viet',
+              'chinh-sach-mua-hang',
+              'bao-mat',
+              'dang-nhap',
+              'tai-khoan',
+              'quan-tri',
+          )
+
+          for name in files:
+              source = root / name
+
+              if not source.is_file():
+                  raise SystemExit(
+                      f'Missing file for deployment: {name}'
+                  )
+
+              copy2(source, destination / name)
+
+          for name in folders:
+              source = root / name
+
+              if not source.is_dir():
+                  raise SystemExit(
+                      f'Missing directory for deployment: {name}'
+                  )
+
+              copytree(
+                  source,
+                  destination / name,
+                  dirs_exist_ok=True
+              )
+
+          (destination / '.nojekyll').touch()
+
+          print(
+              'Public site prepared at:',
+              destination
+          )
+          PY
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
