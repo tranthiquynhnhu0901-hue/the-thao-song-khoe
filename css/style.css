@@ -49,7 +49,7 @@ h3{font-size:20px}
 .btn.block{width:100%}
 .icon-btn{height:42px;width:42px;display:inline-grid;place-items:center;background:#f1f5f9;border:1px solid var(--line);border-radius:11px;color:var(--navy)}
 .icon-btn:hover{background:#e8effa}
-.icon{width:20px;height:20px;display:inline-block;vertical-align:middle;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.icon{width:20px;height:20px;display:inline-block;vertical-align:middle;width:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .topbar{background:#101e33;color:#e9effa;font-size:11px;font-weight:600}
 .topbar-inner{min-height:35px;display:flex;justify-content:space-between;align-items:center;gap:12px}
 .topbar span:first-child{color:var(--lime)}
@@ -354,7 +354,7 @@ textarea.form-control{min-height:110px;resize:vertical}
 .mobile-search input{flex:1;min-width:0;border:0;background:transparent;padding:10px 13px;outline:none}
 .mobile-search button{background:var(--blue);border:0;color:#fff;width:48px}
 .header-action{padding:5px}
-.header-action span:last-child{display:none}
+.header-action > span:last-child{display:none}
 .mobile-toggle{display:grid}
 .navbar{display:none}
 .navbar.open{display:block}
@@ -433,42 +433,4 @@ textarea.form-control{min-height:110px;resize:vertical}
 .article-cover{aspect-ratio:1.45}
 .static-copy{font-size:13px}
 .side-nav{grid-template-columns:repeat(2,1fr)}
-.admin-shell{display:block}
-.admin-aside{padding:18px}
-.admin-aside .logo{display:none}
-.admin-aside h4{display:none}
-.admin-menu{display:flex;overflow-x:auto;gap:5px}
-.admin-menu button{flex-shrink:0;width:auto;white-space:nowrap;padding:10px 12px}
-.admin-main{padding:22px 15px}
-.stat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
-.stat-card{padding:14px}
-.stat-card b{font-size:21px}
-.admin-form{grid-template-columns:1fr}
-.admin-titlebar h1{font-size:23px}
-.footer{padding-top:40px}
-}
-
-@media(max-width:370px){
-.container{width:calc(100% - 22px)}
-.hero-copy{padding:29px 21px 11px}
-.hero h1{font-size:36px}
-.product-bottom{display:block}
-.product-bottom .btn{width:100%}
-.product-bottom .icon-btn{display:none}
-.logo-type b{font-size:19px}
-.header-actions{gap:3px}
-.detail-ctas{flex-direction:column}
-}
-
-/* Số cột sản phẩm phù hợp với diện tích còn lại */
-@media (min-width:901px) and (max-width:1180px){
-  .shop-layout .product-grid{
-    grid-template-columns:repeat(3,minmax(0,1fr));
-  }
-}
-
-@media (min-width:761px) and (max-width:900px){
-  .shop-layout .product-grid{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
-}
+.admin
