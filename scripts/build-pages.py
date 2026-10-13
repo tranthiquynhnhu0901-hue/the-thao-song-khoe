@@ -110,60 +110,36 @@ validate_catalog()
 
 categories = [
     (
-        'thoi-trang-the-thao',
-        'Thời trang thể thao',
-        'Khám phá áo thun chạy bộ, áo khoác gió, áo bóng rổ, quần short và legging tại SPORTHUB. '
-        'Tìm trang phục theo hoạt động, so sánh kiểu dáng và xem giá tham khảo. '
-        'Xem thêm gợi ý chọn cỡ.'
+        'thoi-trang-the-thao', 'Thời trang thể thao',
+        'Khám phá áo chạy bộ, áo khoác gió, áo bóng rổ, quần short và legging tại SPORTHUB. Xem kiểu dáng và giá tham khảo.'
     ),
     (
-        'giay-the-thao',
-        'Giày thể thao',
-        'Khám phá giày chạy bộ, tập gym, pickleball, cầu lông và giày đi bộ tại SPORTHUB. '
-        'Tìm kiểu dáng theo bộ môn, kiểm tra kích cỡ và tham khảo mức giá từng mẫu. '
-        'Xem lưu ý về độ vừa chân.'
+        'giay-the-thao', 'Giày thể thao',
+        'Khám phá giày chạy bộ, gym, pickleball, cầu lông và đi bộ tại SPORTHUB. So sánh kiểu giày và giá tham khảo.'
     ),
     (
-        'gym-fitness',
-        'Gym & Fitness',
-        'Tìm hiểu tạ tay, tạ ấm, dây kháng lực, con lăn tập bụng và phụ kiện Gym & Fitness '
-        'tại SPORTHUB. Khám phá dụng cụ tập tại nhà, cách lựa chọn và giá tham khảo. '
-        'Xem lưu ý sử dụng an toàn.'
+        'gym-fitness', 'Gym & Fitness',
+        'Khám phá tạ tay, tạ ấm, dây kháng lực và dụng cụ tập gym tại nhà. Xem thông tin và giá tham khảo tại SPORTHUB.'
     ),
     (
-        'pickleball',
-        'Pickleball',
-        'Khám phá vợt pickleball, bóng, túi đựng vợt và băng quấn cán tại SPORTHUB. '
-        'So sánh các mẫu dụng cụ cho người yêu thích pickleball, tìm hiểu cách chọn '
-        'và tham khảo mức giá từng sản phẩm.'
+        'pickleball', 'Pickleball',
+        'Khám phá vợt, bóng, túi đựng vợt và băng quấn cán pickleball tại SPORTHUB. So sánh sản phẩm và giá tham khảo.'
     ),
     (
-        'cau-long',
-        'Cầu lông',
-        'Khám phá vợt cầu lông, ống cầu, dây cước và túi đựng vợt tại SPORTHUB. '
-        'Tìm hiểu phụ kiện dành cho tập luyện và giải trí, so sánh các mẫu cùng giá tham khảo. '
-        'Xem gợi ý chọn vợt.'
+        'cau-long', 'Cầu lông',
+        'Khám phá vợt cầu lông, ống cầu, dây cước và túi đựng vợt tại SPORTHUB. Xem dụng cụ tập luyện và giá tham khảo.'
     ),
     (
-        'yoga-pilates',
-        'Yoga & Pilates',
-        'Khám phá thảm yoga, gạch hỗ trợ, vòng Pilates và dây kéo giãn tại SPORTHUB. '
-        'Tìm dụng cụ cho không gian luyện tập tại nhà, xem đặc điểm, hướng dẫn lựa chọn '
-        'và mức giá tham khảo.'
+        'yoga-pilates', 'Yoga & Pilates',
+        'Khám phá thảm yoga, gạch hỗ trợ, vòng Pilates và dây kéo giãn tại SPORTHUB. Xem thông tin dụng cụ và giá tham khảo.'
     ),
     (
-        'phu-kien',
-        'Phụ kiện thể thao',
-        'Chọn bình nước, túi tập, vớ, băng đô và đai chạy bộ tại SPORTHUB. '
-        'Khám phá các phụ kiện tiện dụng cho tập luyện, sinh hoạt năng động, '
-        'tìm hiểu từng mẫu và tham khảo giá.'
+        'phu-kien', 'Phụ kiện thể thao',
+        'Chọn bình nước, túi tập, vớ, băng đô và đai chạy bộ tại SPORTHUB. Tìm hiểu phụ kiện vận động và giá tham khảo.'
     ),
     (
-        'phuc-hoi',
-        'Chăm sóc & phục hồi',
-        'Khám phá ống lăn cơ, bóng massage và máy massage cầm tay tại SPORTHUB. '
-        'Tìm hiểu dụng cụ chăm sóc sau vận động, cách dùng an toàn, '
-        'lưu ý khi lựa chọn và mức giá tham khảo.'
+        'phuc-hoi', 'Chăm sóc & phục hồi',
+        'Khám phá ống lăn cơ, bóng massage và máy massage cầm tay tại SPORTHUB. Xem lưu ý sử dụng và mức giá tham khảo.'
     ),
 ]
 
@@ -178,10 +154,7 @@ category_titles = {
     'phuc-hoi': 'Chăm sóc & phục hồi: Ống lăn và dụng cụ massage | SPORTHUB',
 }
 
-category_names = {
-    slug: name
-    for slug, name, _ in categories
-}
+category_names = {slug: name for slug, name, _ in categories}
 
 # ============================================================
 # ARTICLE SEO METADATA
@@ -191,25 +164,20 @@ posts = [
     (
         'bat-dau-chay-bo-dung-cach',
         'Bắt đầu chạy bộ: 5 điều nên biết cho người mới',
-        'Gợi ý chọn giày và trang phục chạy bộ phù hợp cho người mới, khởi động nhẹ, '
-        'xen kẽ chạy với đi bộ và duy trì thói quen vận động vừa sức. '
-        'Khám phá những lưu ý hữu ích từ SPORTHUB.'
+        'Gợi ý chọn giày, khởi động và kết hợp chạy với đi bộ cho người mới bắt đầu. Duy trì thói quen vận động cùng SPORTHUB.'
     ),
     (
         'sap-xep-goc-tap-gym-tai-nha',
         'Gợi ý bố trí góc tập gym gọn gàng tại nhà',
-        'Tìm hiểu cách bố trí góc tập gym tại nhà gọn gàng, thông thoáng; '
-        'lựa chọn thảm tập, dây kháng lực và tạ tay phù hợp với nhu cầu. '
-        'Khám phá lưu ý sử dụng và bảo quản dụng cụ an toàn.'
+        'Tìm hiểu cách bố trí góc tập gym tại nhà và chọn thảm, dây kháng lực, tạ tay phù hợp. Xem lưu ý tập an toàn.'
     ),
     (
         'lam-quen-voi-pickleball',
-        'Pickleball: bộ môn thú vị để vận động cùng bạn bè',
-        'Làm quen với cách chơi và tính điểm pickleball cơ bản, tìm hiểu vợt, bóng '
-        'và giày sân cần chuẩn bị. Xem gợi ý luyện tập, phối hợp đồng đội '
-        'và bắt đầu vận động vui cùng bạn bè tại SPORTHUB.'
+        'Pickleball: bộ môn thú vị để chơi cùng bạn bè',
+        'Làm quen với pickleball: luật chơi cơ bản, cách chọn vợt, bóng và giày sân. Xem mẹo tập cùng bạn bè tại SPORTHUB.'
     ),
 ]
+
 # ============================================================
 # MAIN ROUTES
 # ============================================================
@@ -219,101 +187,62 @@ posts = [
 
 routes = [
     (
-        '',
-        'home',
-        '',
+        '', 'home', '',
         'SPORTHUB | 40 mẫu thời trang, giày và dụng cụ thể thao',
-        'Khám phá 40 mẫu thời trang thể thao, giày chạy bộ, dụng cụ gym, '
-        'pickleball, cầu lông và yoga tại SPORTHUB. '
-        'Xem danh mục, so sánh lựa chọn, tìm đồ tập theo nhu cầu '
-        'và tham khảo giá từng sản phẩm.'
+        'Khám phá 40 mẫu thời trang, giày và dụng cụ thể thao SPORTHUB. Xem 8 danh mục, thông tin sản phẩm và giá tham khảo.'
     ),
     (
-        'san-pham',
-        'shop',
-        '',
+        'san-pham', 'shop', '',
         'Cửa hàng thể thao: 40 sản phẩm & 8 danh mục | SPORTHUB',
-        'Khám phá 40 mẫu thời trang, giày và dụng cụ thể thao tại SPORTHUB. '
-        'Lọc theo 8 danh mục, mức giá và ưu đãi để chọn sản phẩm phù hợp. '
-        'Xem mô tả, thông tin từng mẫu và mức giá tham khảo.'
+        'Khám phá 40 sản phẩm ở 8 danh mục SPORTHUB: thời trang, giày, gym, pickleball và yoga. Lọc theo giá, bộ môn và ưu đãi.'
     ),
     (
-        'gio-hang',
-        'cart',
-        '',
+        'gio-hang', 'cart', '',
         'Giỏ hàng | SPORTHUB',
         'Quản lý những sản phẩm bạn chọn.'
     ),
     (
-        'thanh-toan',
-        'checkout',
-        '',
+        'thanh-toan', 'checkout', '',
         'Thanh toán | SPORTHUB',
         'Kiểm tra và đặt hàng thể thao.'
     ),
     (
-        'gioi-thieu',
-        'about',
-        '',
+        'gioi-thieu', 'about', '',
         'Giới thiệu SPORTHUB – Thể thao & lối sống năng động',
-        'Tìm hiểu SPORTHUB và tinh thần vận động mỗi ngày. '
-        'Khám phá cách cửa hàng giới thiệu thời trang, giày, dụng cụ gym '
-        'và phụ kiện cho nhiều bộ môn, cùng những thông tin cần biết trước khi mua.'
+        'Tìm hiểu về SPORTHUB và tinh thần vận động mỗi ngày. Khám phá 8 danh mục thời trang, giày và dụng cụ thể thao.'
     ),
     (
-        'lien-he',
-        'contact',
-        '',
+        'lien-he', 'contact', '',
         'Liên hệ SPORTHUB: Hỏi đáp và hỗ trợ mua đồ thể thao',
-        'Liên hệ SPORTHUB để trao đổi về thời trang, giày và dụng cụ thể thao. '
-        'Xem các kênh hỗ trợ đã được cấu hình, đặt câu hỏi về sản phẩm '
-        'hoặc tìm hiểu chính sách mua hàng và mức giá tham khảo.'
+        'Liên hệ SPORTHUB để hỏi về sản phẩm, giá tham khảo và chính sách mua hàng. Xem các kênh hỗ trợ của cửa hàng.'
     ),
     (
-        'bai-viet',
-        'blog',
-        '',
+        'bai-viet', 'blog', '',
         'Kiến thức thể thao: Chạy bộ, gym, pickleball | SPORTHUB',
-        'Đọc bài viết SPORTHUB về cách bắt đầu chạy bộ, sắp xếp góc tập gym '
-        'gọn gàng tại nhà và làm quen với pickleball. '
-        'Khám phá những mẹo vận động, chuẩn bị dụng cụ và duy trì thói quen năng động.'
+        'Đọc bài viết SPORTHUB về bắt đầu chạy bộ, bố trí góc tập gym tại nhà và làm quen với pickleball. Khám phá mẹo vận động.'
     ),
     (
-        'chinh-sach-mua-hang',
-        'policy',
-        '',
+        'chinh-sach-mua-hang', 'policy', '',
         'Chính sách mua hàng: Thanh toán và giao nhận | SPORTHUB',
-        'Tìm hiểu chính sách mua hàng tại SPORTHUB, các bước đặt hàng, '
-        'phương thức thanh toán, phí giao hàng tham khảo và lưu ý về đổi trả. '
-        'Xem điều kiện cần xác nhận trước khi website mở bán chính thức.'
+        'Tìm hiểu chính sách mua hàng SPORTHUB: đặt hàng, thanh toán, giao nhận và lưu ý đổi trả trước khi mua sản phẩm.'
     ),
     (
-        'bao-mat',
-        'privacy',
-        '',
+        'bao-mat', 'privacy', '',
         'Chính sách bảo mật & điều khoản sử dụng | SPORTHUB',
-        'Đọc chính sách bảo mật và điều khoản sử dụng SPORTHUB. '
-        'Tìm hiểu cách xử lý dữ liệu khi tính năng tài khoản được kích hoạt, '
-        'quyền riêng tư của người dùng và những lưu ý khi truy cập website.'
+        'Đọc chính sách bảo mật và điều khoản SPORTHUB, cách dùng thông tin tài khoản và quyền riêng tư khi truy cập website.'
     ),
     (
-        'dang-nhap',
-        'login',
-        '',
+        'dang-nhap', 'login', '',
         'Đăng nhập | SPORTHUB',
         'Giao diện đăng nhập mô phỏng của SPORTHUB.'
     ),
     (
-        'tai-khoan',
-        'account',
-        '',
+        'tai-khoan', 'account', '',
         'Tài khoản | SPORTHUB',
         'Trang tài khoản mô phỏng của SPORTHUB.'
     ),
     (
-        'quan-tri',
-        'admin',
-        '',
+        'quan-tri', 'admin', '',
         'Quản trị website | SPORTHUB',
         'Khu vực quản trị riêng tư.'
     ),
@@ -336,37 +265,17 @@ for cat_slug, _name, description in categories:
 # PRODUCT ROUTES
 # ============================================================
 
-# Product SEO titles stay descriptive and readable, not just product IDs.
-# Candidate contexts are category-specific; always keep the owner's exact name.
+# Product titles always contain the owner's original product name.
+# Choose accurate category context without inventing technical features.
 PRODUCT_TITLE_CONTEXTS = {
-    'thoi-trang-the-thao': (
-        'Thời trang thể thao', 'Trang phục vận động', 'Đồ tập thể thao'
-    ),
-    'giay-the-thao': (
-        'Giày thể thao', 'Giày cho vận động', 'Giày theo bộ môn'
-    ),
-    'gym-fitness': (
-        'Dụng cụ Gym & Fitness', 'Dụng cụ tập gym',
-        'Thiết bị tập luyện', 'Gym & Fitness'
-    ),
-    'pickleball': (
-        'Dụng cụ Pickleball', 'Phụ kiện Pickleball', 'Pickleball'
-    ),
-    'cau-long': (
-        'Dụng cụ cầu lông', 'Phụ kiện cầu lông', 'Cầu lông'
-    ),
-    'yoga-pilates': (
-        'Dụng cụ Yoga & Pilates', 'Yoga & Pilates',
-        'Phụ kiện yoga', 'Tập yoga tại nhà'
-    ),
-    'phu-kien': (
-        'Phụ kiện thể thao', 'Phụ kiện vận động',
-        'Đồ tập thể thao'
-    ),
-    'phuc-hoi': (
-        'Chăm sóc & phục hồi', 'Dụng cụ massage',
-        'Dụng cụ phục hồi'
-    ),
+    'thoi-trang-the-thao': ('Thời trang thể thao', 'Trang phục vận động', 'Đồ tập thể thao'),
+    'giay-the-thao': ('Giày thể thao', 'Giày cho vận động', 'Giày theo bộ môn'),
+    'gym-fitness': ('Dụng cụ Gym & Fitness', 'Dụng cụ tập gym', 'Thiết bị tập luyện'),
+    'pickleball': ('Dụng cụ Pickleball', 'Phụ kiện Pickleball', 'Pickleball'),
+    'cau-long': ('Dụng cụ cầu lông', 'Phụ kiện cầu lông', 'Cầu lông'),
+    'yoga-pilates': ('Dụng cụ Yoga & Pilates', 'Yoga & Pilates', 'Phụ kiện yoga'),
+    'phu-kien': ('Phụ kiện thể thao', 'Phụ kiện vận động', 'Đồ tập thể thao'),
+    'phuc-hoi': ('Chăm sóc & phục hồi', 'Dụng cụ massage', 'Dụng cụ phục hồi'),
 }
 
 
@@ -374,38 +283,33 @@ def product_seo_title(product):
     name = str(product['name']).strip()
     contexts = PRODUCT_TITLE_CONTEXTS.get(product.get('category'), ())
     candidates = [f'{name} – {context} | SPORTHUB' for context in contexts]
-
-    # Select the first accurate category phrase within the reference length.
     for candidate in candidates:
         if 50 <= len(candidate) <= 60:
             return candidate
-
-    # Keep meaning, not forced filler, when a future product has a new name.
     return min(candidates, key=lambda x: abs(len(x) - 55)) if candidates else f'{name} | SPORTHUB'
 
 
 def product_seo_description(product):
-    # Reuse the already reviewed, unique per-product description in products.json.
-    # Never invent material, weight, technical performance or product photos.
-    detailed = ' '.join(str(product.get('description') or '').split())
-    short = ' '.join(str(product.get('short') or '').split())
+    """Keep a natural, unique summary close to the tested SEOquake examples."""
+    name = str(product['name']).strip()
+    short = ' '.join(str(product.get('short') or '').split()).rstrip(' .')
+    prefix = f'{name}: {short}.' if short else f'Tìm hiểu {name} tại SPORTHUB.'
 
-    if detailed:
-        first_sentence = detailed.split('. ', 1)[0].rstrip(' .') + '.'
-    else:
-        first_sentence = (
-            f"{product['name']} tại SPORTHUB. "
-            + short.rstrip(' .') + '.'
-        )
-
-    if len(first_sentence) >= 160:
-        return first_sentence + ' Xem giá tại SPORTHUB.'
-    if len(first_sentence) >= 142:
-        return first_sentence + ' Xem giá và thông số tại SPORTHUB.'
-    return (
-        first_sentence
-        + ' Xem thông số, cách chọn và giá tham khảo tại SPORTHUB.'
+    endings = (
+        ' Tìm hiểu cách sử dụng và giá tham khảo tại SPORTHUB.',
+        ' Tìm hiểu cách chọn và giá tại SPORTHUB.',
+        ' Xem cách chọn và giá tham khảo tại SPORTHUB.',
+        ' Xem thông số và giá tham khảo tại SPORTHUB.',
+        ' Xem chi tiết và giá tham khảo tại SPORTHUB.',
+        ' Tìm hiểu sản phẩm và giá tại SPORTHUB.',
+        ' Xem mẫu và giá tham khảo tại SPORTHUB.',
+        ' Xem giá tham khảo tại SPORTHUB.',
+        ' Xem giá tại SPORTHUB.',
     )
+    choices = [prefix + end for end in endings]
+    # Aim around 118 characters, not the longer 158-195 used previously.
+    in_range = [text for text in choices if 105 <= len(text) <= 125]
+    return min(in_range or choices, key=lambda text: abs(len(text) - 118))
 
 
 for product in products:
@@ -414,7 +318,7 @@ for product in products:
         'product',
         product['slug'],
         product_seo_title(product),
-        product_seo_description(product)
+        product_seo_description(product),
     ))
 
 # ============================================================
@@ -429,32 +333,31 @@ for article_slug, name, description in posts:
         f'{name} | SPORTHUB',
         description
     ))
-    # ============================================================
-# VALIDATE SEO ROUTES BEFORE WRITING HTML
+
 # ============================================================
+# VALIDATE PUBLIC SEO BEFORE WRITING HTML
+# ============================================================
+
+PRIVATE_PAGES = {'checkout', 'cart', 'account', 'login', 'admin'}
+PUBLIC_ROUTES = [route for route in routes if route[1] not in PRIVATE_PAGES]
 
 if len(routes) != 63 or len({route[0] for route in routes}) != 63:
     raise SystemExit('Build stopped: expected 63 unique routes.')
 
-PUBLIC_TYPES = {'home', 'shop', 'about', 'contact', 'blog', 'policy',
-                'privacy', 'category', 'product', 'article'}
-public_titles = [title for _, page, _, title, _ in routes if page in PUBLIC_TYPES]
-public_descriptions = [desc for _, page, _, _, desc in routes if page in PUBLIC_TYPES]
+if len(PUBLIC_ROUTES) != 58:
+    raise SystemExit('Build stopped: expected 58 public routes.')
 
-if len(set(public_titles)) != len(public_titles):
-    raise SystemExit('Build stopped: duplicate SEO titles on public pages.')
-if len(set(public_descriptions)) != len(public_descriptions):
-    raise SystemExit('Build stopped: duplicate SEO descriptions on public pages.')
+for field, index in (('titles', 3), ('descriptions', 4)):
+    values = [route[index] for route in PUBLIC_ROUTES]
+    if len(values) != len(set(values)):
+        raise SystemExit(f'Build stopped: duplicate SEO {field}.')
 
-# SEOquake length checks are heuristics, not Google ranking requirements.
-# Warn instead of preventing deploy if a later edit changes text length.
-for path, page, _slug, title, description in routes:
-    if page not in PUBLIC_TYPES:
-        continue
+# Length is a tool heuristic; content accuracy and search intent come first.
+for path, _page, _slug, title, description in PUBLIC_ROUTES:
     if not 50 <= len(title) <= 60:
-        print(f'SEO length review - title {len(title)}: {path or "/"}', file=sys.stderr)
-    if not 161 <= len(description) <= 210:
-        print(f'SEO length review - description {len(description)}: {path or "/"}', file=sys.stderr)
+        print(f'SEO review: title {len(title)} characters at {path or "/"}', file=sys.stderr)
+    if not 105 <= len(description) <= 130:
+        print(f'SEO review: description {len(description)} characters at {path or "/"}', file=sys.stderr)
 
 # ============================================================
 # SOCIAL IMAGES
@@ -483,18 +386,6 @@ def social_image(product=None):
 
     return None
 
-
-# ============================================================
-# PRIVATE PAGES
-# ============================================================
-
-PRIVATE_PAGES = {
-    'checkout',
-    'cart',
-    'account',
-    'login',
-    'admin'
-}
 
 PRODUCT_BY_SLUG = {
     p['slug']: p
@@ -573,6 +464,7 @@ for path, page, slug, title, description in routes:
         content,
         encoding='utf-8'
     )
+
 # ============================================================
 # GENERATE 404 PAGE
 # ============================================================
