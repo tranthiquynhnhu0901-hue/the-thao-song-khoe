@@ -178,7 +178,7 @@ function asset(path){
 
 // Clean public URLs; support local file preview separately.
 // Product image component shared by home, shop, categories, detail, cart and checkout.
-// Upload img/products/<slug>.webp later; no per-page edits or SVG placeholders needed.
+// Upload the exact p.image WebP filename later; no per-page edits or SVG placeholders needed.
 function productPhoto(p, {loading='lazy', width=380, height=380, small=false}={}){
   const label = escapeHTML(p.name || 'Sản phẩm SPORTHUB');
   const image = escapeHTML(asset(p.image));
@@ -266,7 +266,7 @@ function icon(name,size=20){
     menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
     truck:'<path d="M3 5h12v12H3zM15 10h4l3 4v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>',
     shield:'<path d="M12 2 4 5v6c0 6 4 10 8 11 4-1 8-5 8-11V5z"/><path d="m9 12 2 2 4-4"/>',
-    refresh:'<path d="M3 11a9 9 0 0 1 16-5l2 2M21 13a9 9 0 0 1-16 5l-2-2M21 3v5h-5M3 21v-5h5"/>',
+    refresh:'<path d="M3 11a9 9 0 0 1 16-5l2 2M3 11l-2-2M3 11l3-3M21 13l2 2M21 13l-3 3"/>',
     headphones:'<path d="M3 13v-2a9 9 0 0 1 18 0v2M3 13h4v8H5a2 2 0 0 1-2-2zM21 13h-4v8h2a2 2 0 0 0 2-2z"/>',
     arrow:'<path d="M5 12h14m-6-6 6 6-6 6"/>',
     trash:'<path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 10v7M14 10v7"/>',
@@ -396,7 +396,7 @@ function footer(){
 }
 
 function productCard(p){
-  return `<article class="product-card"><div class="product-pic"><a href="${productLink(p)}" aria-label="Xem ${escapeHTML(p.name)}">${productPhoto(p)}</a>${p.salePrice?'<span class="tag orange">−14%</span>':p.new?'<span class="tag">Hàng mới</span>':''}<button class="wish ${favorites.includes(p.id)?'is-active':''}" data-action="wish" data-id="${p.id}" data-wish="${p.id}" aria-label="${favorites.includes(p.id)?'Bỏ yêu thích':'Yêu thích'}">${icon('heart',17)}</button></div><div class="product-info"><div class="cat">${escapeHTML(catName(p.category))}</div><a class="product-title" href="${productLink(p)}">${escapeHTML(p.name)}</a><div class="rating"><span class="muted">Mã ${escapeHTML(p.id)} • Giá tham khảo</span></div><div class="price">${money(price(p))}${p.salePrice?`<span class="old-price">${money(p.price)}</span>`:''}</div><div class="product-bottom"><button class="btn sm" data-action="add" data-id="${p.id}">${icon('bag',15)} Thêm vào giỏ</button><a class="icon-btn" href="${productLink(p)}" aria-label="Chi tiết">${icon('arrow',17)}</a></div></div></article>`;
+  return `<article class="product-card"><div class="product-pic"><a href="${productLink(p)}" aria-label="Xem ${escapeHTML(p.name)}">${productPhoto(p)}</a>${p.salePrice && p.price>p.salePrice?`<span class="tag orange">−${Math.round((p.price-p.salePrice)/p.price*100)}%</span>`:p.new?'<span class="tag">Hàng mới</span>':''}<button class="wish ${favorites.includes(p.id)?'is-active':''}" data-action="wish" data-id="${p.id}" data-wish="${p.id}" aria-label="${favorites.includes(p.id)?'Bỏ yêu thích':'Yêu thích'}">${icon('heart',17)}</button></div><div class="product-info"><div class="cat">${escapeHTML(catName(p.category))}</div><a class="product-title" href="${productLink(p)}">${escapeHTML(p.name)}</a><div class="rating"><span class="muted">Mã ${escapeHTML(p.id)} • Giá tham khảo</span></div><div class="price">${money(price(p))}${p.salePrice?`<span class="old-price">${money(p.price)}</span>`:''}</div><div class="product-bottom"><button class="btn sm" data-action="add" data-id="${p.id}">${icon('bag',15)} Thêm vào giỏ</button><a class="icon-btn" href="${productLink(p)}" aria-label="Chi tiết">${icon('arrow',17)}</a></div></div></article>`;
 }
 
 function productGrid(items){
@@ -587,11 +587,19 @@ function shop(){
     ? '<input id="filter-q" type="hidden" value="">'
     : `<label class="filter-label" for="filter-q">Tìm nhanh</label><input class="form-control" id="filter-q" placeholder="Nhập tên sản phẩm" value="${escapeHTML(shopFilters.q)}">`;
 
-  const introText = isCat && slug === 'thoi-trang-the-thao'
-    ? 'Khám phá áo chạy bộ, áo khoác gió, áo bóng rổ, quần short và quần legging dành cho các hoạt động thể thao.'
-    : isCat
-      ? 'Khám phá các lựa chọn dành cho '+escapeHTML(name)+'.'
-      : 'Chọn sản phẩm phù hợp với nhịp vận động của bạn.';
+  const categoryIntros = {
+    'thoi-trang-the-thao':'Khám phá áo chạy bộ, áo khoác gió, áo bóng rổ, quần short và legging cho nhiều hoạt động. So sánh kiểu dáng và giá tham khảo.',
+    'giay-the-thao':'Tìm hiểu các mẫu giày chạy bộ, tập gym, pickleball, cầu lông và giày đi bộ. Chọn theo bộ môn và kiểm tra cỡ giày trước khi mua.',
+    'gym-fitness':'Tham khảo tạ tay, tạ ấm, dây kháng lực, con lăn tập bụng và dây nhảy cho góc tập tại nhà. Kiểm tra trọng lượng và cách sử dụng an toàn.',
+    'pickleball':'Khám phá vợt, bóng, túi đựng vợt và băng quấn cán pickleball. So sánh kiểu dáng, nhu cầu chơi và thông tin sản phẩm trước khi lựa chọn.',
+    'cau-long':'Tìm hiểu vợt cầu lông, ống cầu, dây cước và túi đựng vợt. Tham khảo trang bị cho tập luyện, chơi giải trí và cách chọn phụ kiện.',
+    'yoga-pilates':'Khám phá thảm yoga, gạch hỗ trợ, vòng Pilates và dây kéo giãn. Tìm dụng cụ cho không gian luyện tập và kiểm tra thông số trước khi sử dụng.',
+    'phu-kien':'Tham khảo bình nước, túi thể thao, vớ, băng đô và đai chạy bộ. Khám phá các phụ kiện phục vụ tập luyện và sinh hoạt năng động.',
+    'phuc-hoi':'Tìm hiểu ống lăn cơ, bóng massage và máy massage cầm tay. Tham khảo cách lựa chọn dụng cụ chăm sóc sau vận động và lưu ý sử dụng an toàn.'
+  };
+  const introText = isCat
+    ? (categoryIntros[slug] || 'Khám phá các lựa chọn dành cho '+escapeHTML(name)+'.')
+    : 'Chọn sản phẩm phù hợp với nhịp vận động của bạn.';
 
   return `<main>
     ${crumb([{text:name}])}
@@ -670,7 +678,7 @@ function detail(){
           <div class="detail-image">
             ${productPhoto(p,{loading:'eager',width:680,height:680})}
           </div>
-          <p class="muted text-small">Hình ảnh minh họa cho danh mục mẫu. Vui lòng xác nhận thông tin sản phẩm thực tế trước khi đặt bán.</p>
+          <p class="muted text-small">Ảnh sản phẩm sẽ tự cập nhật khi có tệp WebP đúng tên. Vui lòng xác nhận thông tin thực tế trước khi mua.</p>
         </div>
         <div class="detail-side">
           <span class="tag">${escapeHTML(catName(p.category))}</span>
@@ -794,7 +802,6 @@ function cartPage(){
     </section>
   </main>`;
 }
-
 // Restored complete pages and checkout from the previous working source.
 function checkout(){if(!cartCount())return `<main>${crumb([{text:'Thanh toán'}])}<section class="section container"><div class="empty"><h1>Giỏ hàng đang trống</h1><a class="btn" href="${link('san-pham')}">Chọn sản phẩm</a></div></section></main>`;const active=Boolean(fb&&user);const bankReady=Boolean(settings.bankName&&settings.bankAccount&&settings.bankHolder);return `<main>${crumb([{text:'Giỏ hàng',href:link('gio-hang')},{text:'Thanh toán'}])}<div class="page-intro"><div class="container"><h1>Thanh toán an toàn</h1><p>Thông tin đơn hàng sẽ được kiểm tra lại trên máy chủ.</p></div></div><section class="section sm"><div class="container checkout-layout"><div><div class="panel"><h3>01. Thông tin nhận hàng</h3>${!fb?'<div class="notice warning">Chưa kết nối dịch vụ bán hàng. Có thể xem giao diện, nhưng chưa thể gửi đơn hàng thật.</div>':!user?`<div class="notice warning">Vui lòng <a href="${link('dang-nhap')}"><u>đăng nhập Google</u></a> trước khi đặt hàng.</div>`:''}<form id="checkout-form"><div class="form-grid"><div class="field"><label for="co-name">Họ và tên *</label><input class="form-control" id="co-name" name="name" required maxlength="100" value="${escapeHTML(user?.displayName||'')}" placeholder="Nguyễn Văn A"/></div><div class="field"><label for="co-phone">Số điện thoại *</label><input class="form-control" id="co-phone" name="phone" type="tel" pattern="[0-9+ .-]{9,16}" required placeholder="09xxxxxxxx"/></div></div><div class="field"><label for="co-address">Địa chỉ giao hàng *</label><input class="form-control" id="co-address" name="address" required maxlength="260" placeholder="Số nhà, đường, phường, quận, tỉnh/thành"/></div><div class="field"><label for="co-note">Ghi chú (không bắt buộc)</label><textarea class="form-control" id="co-note" name="note" maxlength="500" rows="3" placeholder="Ví dụ: giao giờ hành chính"></textarea></div><h3 style="margin-top:20px">02. Phương thức thanh toán</h3><label class="payment-option"><input type="radio" name="payment" value="cod" checked/> <span><b>Thanh toán khi nhận hàng (COD)</b><br><small class="muted">Thanh toán cho đơn vị giao hàng sau khi nhận đơn.</small></span></label>${bankReady?`<label class="payment-option"><input type="radio" name="payment" value="bank"/> <span><b>Chuyển khoản ngân hàng</b><br><small class="muted">Thông tin và mã QR sẽ xuất hiện sau khi tạo đơn hợp lệ.</small></span></label>`:`<div class="notice">Chuyển khoản/QR sẽ khả dụng khi chủ cửa hàng cấu hình tài khoản nhận tiền.</div>`}<button class="btn block space-top" type="submit" ${active?'':'disabled'}>${icon('lock',17)} ${active?'Xác nhận đặt hàng':'Đặt hàng chưa khả dụng'}</button><div id="order-result" role="status"></div></form></div></div><aside class="panel"><h3>Đơn hàng (${cartCount()} sản phẩm)</h3>${cart.map(it=>{const p=getProduct(it.id);return p?`<div style="display:flex;gap:10px;align-items:center;margin-bottom:15px">${productPhoto(p,{width:56,height:56,small:true})}<div style="flex:1"><b style="font-size:11px">${escapeHTML(p.name)}</b><div class="muted text-small">${escapeHTML(it.variant||p.variants?.[0]||'Tiêu chuẩn')} • Số lượng: ${it.qty}</div></div><b style="font-size:11px">${money(price(p)*it.qty)}</b></div>`:''}).join('')}${totalsHtml(cartSubtotal())}</aside></div></section></main>`}
 function intro(){return `<main>${crumb([{text:'Giới thiệu'}])}<div class="page-intro"><div class="container"><div class="eyebrow">WE ARE SPORTHUB</div><h1>Vận động theo cách của bạn</h1><p>Chúng tôi tin mỗi bước chân đều là một khởi đầu đáng giá.</p></div></div><section class="section"><div class="container"><div class="contact-grid" style="align-items:center"><div><div class="eyebrow">OUR STORY</div><h2>Không chỉ là những món đồ thể thao</h2><p style="color:#586980;line-height:2">SPORTHUB được xây dựng với mong muốn giúp mọi người tìm được trang phục và dụng cụ phù hợp với những hoạt động yêu thích. Dù bạn vừa làm quen với đường chạy, bước vào phòng gym hay khám phá pickleball, hãy bắt đầu từ niềm vui được vận động.</p><p style="color:#586980;line-height:2">Mẫu website này minh họa danh mục 40 sản phẩm thuộc 8 nhóm. Khi vận hành chính thức, chủ cửa hàng sẽ bổ sung thông tin và hình ảnh thực tế, tồn kho và chính sách cụ thể.</p><a href="${link('san-pham')}" class="btn">Khám phá cửa hàng ${icon('arrow')}</a></div><img style="border-radius:22px;max-height:460px;object-fit:cover;width:100%" src="${asset('assets/img/editorial/about.svg')}" alt="Hình minh họa tinh thần vận động"/></div></div></section><section class="section soft"><div class="container">${sectionTitle('GIÁ TRỊ CỐT LÕI','Mỗi ngày một phiên bản tốt hơn')}<div class="trustbar"><div class="trust-item">${icon('shield')} <b>Minh bạch</b></div><div class="trust-item">${icon('heart')} <b>Tích cực</b></div><div class="trust-item">${icon('truck')} <b>Thuận tiện</b></div><div class="trust-item">${icon('star')} <b>Tinh gọn</b></div></div></div></section></main>`}
@@ -803,8 +810,8 @@ function blog(){return `<main>${crumb([{text:'Kiến thức thể thao'}])}<div 
 function mergedPosts(){return [...posts.map(p=>adminPosts.find(a=>a.slug===p.slug)?{...p,...adminPosts.find(a=>a.slug===p.slug)}:p),...adminPosts.filter(p=>!posts.some(x=>x.slug===p.slug))].filter(p=>p.published!==false)}
 function article(){const p=mergedPosts().find(x=>x.slug===(slug||new URLSearchParams(location.search).get('p')));if(!p)return notFound();return `<main>${crumb([{text:'Kiến thức thể thao',href:link('bai-viet')},{text:p.title}])}<section class="section sm"><div class="container article-layout"><article class="article-content"><div class="eyebrow">${escapeHTML(p.category||'Kiến thức')} • ${escapeHTML(p.date||'')}</div><h1>${escapeHTML(p.title)}</h1><p style="font-size:17px;font-weight:700">${escapeHTML(p.intro)}</p><img class="article-cover" src="${asset(p.image)}" alt="${escapeHTML(p.title)}"/>${(Array.isArray(p.content)?p.content:[]).map((v,i)=>`<h2>${['Bắt đầu từ điều cơ bản','Duy trì thói quen phù hợp','Lắng nghe cơ thể'][i]||'Gợi ý dành cho bạn'}</h2><p>${escapeHTML(v)}</p>`).join('')}<div class="notice">Bài viết mang tính chia sẻ kiến thức chung, không thay thế lời khuyên từ chuyên gia.</div><a class="link-arrow" href="${link('bai-viet')}">← Trở lại bài viết</a></article><aside><div class="panel"><h3>Bài viết khác</h3>${mergedPosts().filter(x=>x.slug!==slug).map(x=>`<p><a href="${articleLink(x)}"><b>${escapeHTML(x.title)} ↗</b></a></p>`).join('')}</div></aside></div></section></main>`}
 function policy(type){const privacy=type==='privacy';return `<main>${crumb([{text:privacy?'Bảo mật & điều khoản':'Chính sách mua hàng'}])}<div class="page-intro"><div class="container"><h1>${privacy?'Chính sách bảo mật & điều khoản':'Chính sách mua hàng'}</h1><p>Nguyên tắc minh bạch để bạn yên tâm khi sử dụng SPORTHUB.</p></div></div><section class="section"><div class="container static-copy">${privacy?`<h2>1. Thông tin thu thập</h2><p>Khi bạn đăng nhập Google và mua hàng (sau khi hệ thống được kết nối), SPORTHUB chỉ cần thông tin tài khoản, địa chỉ giao hàng, số điện thoại và dữ liệu đơn hàng để xử lý việc bán hàng. Không thu thập dữ liệu sức khỏe cá nhân.</p><h2>2. Mục đích sử dụng</h2><p>Dữ liệu được sử dụng để xác thực tài khoản, giao hàng, hỗ trợ và quản lý đơn hàng. CRM tổng thể chỉ cấp quyền cho quản trị viên đã được xác minh.</p><h2>3. Bảo vệ dữ liệu</h2><p>Hệ thống sử dụng quyền truy cập của backend và quy tắc cơ sở dữ liệu. Không lưu mật khẩu Google trong website. Dữ liệu quan trọng không đặt trong repository GitHub.</p><h2>4. Quyền của người sử dụng</h2><p>Bạn có thể yêu cầu chủ cửa hàng cập nhật hoặc xóa dữ liệu theo các quy định áp dụng. Thông tin liên hệ sẽ được hiển thị khi website chính thức vận hành.</p><h2>5. Điều khoản</h2><p>Danh mục và giá hiện tại mang tính minh họa. Mọi hoạt động thương mại chính thức sẽ tuân theo điều khoản đã công bố và xác nhận đơn hàng hợp lệ trên máy chủ.</p>`:`<h2>1. Đặt hàng</h2><p>Khách hàng chọn sản phẩm, nhập thông tin nhận hàng và xác nhận đặt hàng. Sau khi chủ website kích hoạt backend, hệ thống mới tiếp nhận đơn hàng và đối chiếu giá, tồn kho tại máy chủ.</p><h2>2. Thanh toán</h2><p>Hỗ trợ thanh toán khi nhận hàng (COD) và chuyển khoản khi chủ cửa hàng đã cấu hình thông tin ngân hàng. Việc đặt đơn không đồng nghĩa giao dịch chuyển khoản đã được thanh toán; trạng thái thanh toán được xác nhận riêng sau đối soát.</p><h2>3. Vận chuyển</h2><p>Mức phí mẫu trong giao diện là ${money(settings.shippingFee)} và miễn phí từ ${money(settings.freeShippingFrom)}. Phí giao thực tế, thời gian giao dự kiến và khu vực vận chuyển sẽ được cập nhật khi chính thức hoạt động.</p><h2>4. Đổi trả và bảo hành</h2><p>Điều kiện đổi trả, thời hạn tiếp nhận và phạm vi bảo hành cần được chủ cửa hàng công bố chính thức theo từng dòng sản phẩm trước khi mở bán. Liên hệ bộ phận hỗ trợ để được xác nhận thông tin cụ thể.</p><h2>5. Thông tin sản phẩm</h2><p>Hình ảnh và giá hiện là thông tin mẫu. SPORTHUB khuyến nghị khách hàng xác nhận chất liệu, kích thước và thông số khi sản phẩm thực tế được công bố.</p>`}</div></section></main>`}
-function signIn(){return `<main>${crumb([{text:'Đăng nhập'}])}<div class="container auth-container"><div class="auth-card"><div class="logo-mark" style="margin:0 auto 20px">S</div><h1>${user?'Đã đăng nhập':'Chào mừng trở lại'}</h1><p class="muted">${user?'Bạn đang sử dụng tài khoản '+escapeHTML(user.email):'Đăng nhập an toàn bằng tài khoản Google để quản lý đơn hàng và danh sách yêu thích.'}</p>${!fb?'<div class="notice warning">Chưa kết nối Firebase. Cần điền cấu hình trong <b>js/site-config.js</b> và thiết lập Google Authentication.</div>':user?`<a class="btn block" href="${link('tai-khoan')}">Đến tài khoản của tôi</a><button class="btn outline block space-top" data-action="logout">Đăng xuất</button>`:`<button class="google-btn space-top" data-action="google"><span class="google-g">G</span> Tiếp tục với Google</button>`}<p class="text-small muted space-top">Bằng cách đăng nhập, bạn đồng ý với <a class="text-blue" href="${link('bao-mat')}">điều khoản và chính sách bảo mật</a>.</p></div></div></main>`}
-function account(){if(!user)return `<main>${crumb([{text:'Tài khoản'}])}<section class="section container"><div class="auth-container auth-card"><h1>Tài khoản của tôi</h1><p class="muted">Đăng nhập Google để xem đơn hàng và cập nhật thông tin.</p><a class="btn" href="${link('dang-nhap')}">Đăng nhập Google ${icon('arrow')}</a>${!fb?'<div class="notice warning">Chưa kết nối dịch vụ đăng nhập thực tế.</div>':''}</div></section></main>`;const tabNames={orders:'Đơn hàng của tôi',profile:'Thông tin cá nhân',favorites:'Yêu thích'};return `<main>${crumb([{text:'Tài khoản của tôi'}])}<div class="page-intro"><div class="container"><h1>Xin chào, ${escapeHTML(user.displayName||'bạn')} 👋</h1><p>Quản lý thông tin của bạn cùng SPORTHUB.</p></div></div><section class="section sm"><div class="container account-grid"><aside class="side-nav">${Object.entries(tabNames).map(([k,v])=>`<button class="${accountTab===k?'active':''}" data-action="account-tab" data-tab="${k}">${escapeHTML(v)}</button>`).join('')}${isAdmin?`<a href="${link('quan-tri')}">Quản trị website ↗</a>`:''}<button data-action="logout">Đăng xuất</button></aside><div class="panel" id="account-content">${accountContent()}</div></div></section></main>`}
+function signIn(){return `<main>${crumb([{text:'Đăng nhập'}])}<div class="container auth-container"><div class="auth-card"><div class="logo-mark" style="margin:0 auto 20px">S</div><h1>${user?'Đã đăng nhập':'Chào mừng trở lại'}</h1><p class="muted">${user?'Bạn đang sử dụng tài khoản '+escapeHTML(user.email):'Đây là giao diện tài khoản mẫu. Chức năng đăng nhập chỉ hoạt động sau khi chủ website kích hoạt Google Authentication.'}</p>${!fb?'<div class="notice warning">Chưa kết nối Firebase. Cần điền cấu hình trong <b>js/site-config.js</b> và thiết lập Google Authentication.</div>':user?`<a class="btn block" href="${link('tai-khoan')}">Đến tài khoản của tôi</a><button class="btn outline block space-top" data-action="logout">Đăng xuất</button>`:`<button class="google-btn space-top" data-action="google"><span class="google-g">G</span> Tiếp tục với Google</button>`}<p class="text-small muted space-top">Bằng cách đăng nhập, bạn đồng ý với <a class="text-blue" href="${link('bao-mat')}">điều khoản và chính sách bảo mật</a>.</p></div></div></main>`}
+function account(){if(!user)return `<main>${crumb([{text:'Tài khoản'}])}<section class="section container"><div class="auth-container auth-card"><h1>Tài khoản của tôi</h1><p class="muted">Đây là giao diện tài khoản mẫu. Đăng nhập và quản lý đơn hàng chưa khả dụng nếu dịch vụ chưa được kích hoạt.</p><a class="btn" href="${link('dang-nhap')}">Đăng nhập Google ${icon('arrow')}</a>${!fb?'<div class="notice warning">Chưa kết nối dịch vụ đăng nhập thực tế.</div>':''}</div></section></main>`;const tabNames={orders:'Đơn hàng của tôi',profile:'Thông tin cá nhân',favorites:'Yêu thích'};return `<main>${crumb([{text:'Tài khoản của tôi'}])}<div class="page-intro"><div class="container"><h1>Xin chào, ${escapeHTML(user.displayName||'bạn')} 👋</h1><p>Quản lý thông tin của bạn cùng SPORTHUB.</p></div></div><section class="section sm"><div class="container account-grid"><aside class="side-nav">${Object.entries(tabNames).map(([k,v])=>`<button class="${accountTab===k?'active':''}" data-action="account-tab" data-tab="${k}">${escapeHTML(v)}</button>`).join('')}${isAdmin?`<a href="${link('quan-tri')}">Quản trị website ↗</a>`:''}<button data-action="logout">Đăng xuất</button></aside><div class="panel" id="account-content">${accountContent()}</div></div></section></main>`}
 function accountContent(){if(accountTab==='favorites'){const items=products.filter(p=>favorites.includes(p.id));return `<h3>Danh sách yêu thích (${items.length})</h3>${items.length?productGrid(items):'<div class="empty"><p>Chưa có sản phẩm yêu thích.</p><a class="btn" href="'+link('san-pham')+'">Khám phá sản phẩm</a></div>'}`}
 if(accountTab==='profile')return `<h3>Thông tin cá nhân</h3><p class="muted">Email xác thực: <b>${escapeHTML(user.email)}</b></p><form id="profile-form"><div class="field"><label>Họ và tên</label><input class="form-control" name="displayName" value="${escapeHTML(user.displayName||'')}" required maxlength="100"/></div><div class="field"><label>Số điện thoại (không bắt buộc)</label><input class="form-control" name="phone" value="${escapeHTML(user._phone||'')}" maxlength="20"/></div><div class="field"><label>Địa chỉ mặc định</label><textarea name="address" class="form-control" maxlength="260">${escapeHTML(user._address||'')}</textarea></div><button class="btn">Lưu thông tin</button></form>`;
 return `<h3>Đơn hàng của tôi</h3><div id="my-orders"><p class="muted">${fb?'Đang kiểm tra đơn hàng...':'Không có dữ liệu đơn hàng khi chưa kết nối.'}</p></div>`}
@@ -915,7 +922,8 @@ function metaUpdate(){
   const chosenImage = selectedProduct?.image || selectedArticle?.image;
   const ogImage = document.querySelector('meta[property="og:image"]');
 
-  if(ogImage && chosenImage && isDynamic){
+  if(ogImage && chosenImage && isDynamic &&
+    (!selectedProduct || document.querySelector('.detail-image img.sh-photo-real')?.naturalWidth>0)){
     ogImage.content = asset(chosenImage);
   }
 
@@ -963,17 +971,21 @@ function metaUpdate(){
 
 function schemaProduct(p){
   if(!p)return null;
-  return {
+  const result = {
     '@context':'https://schema.org',
     '@type':'Product',
     name:p.name,
-    image:[asset(p.image)],
     description:p.description||p.short,
     sku:p.id,
     url:productLink(p),
-    category:catName(p.category)
+    category:catName(p)
     // No Offer/AggregateRating while pricing and inventory are samples.
   };
+  const loadedPhoto = document.querySelector('.detail-image img.sh-photo-real');
+  if(loadedPhoto?.complete && loadedPhoto.naturalWidth>0){
+    result.image=[asset(p.image)];
+  }
+  return result;
 }
 
 function schemaArticle(p){
@@ -992,7 +1004,7 @@ function schemaArticle(p){
   };
 }
 
-function onFilterChange(){
+function onFilterChange(restoreSearchFocus=false){
   const queryInput=document.getElementById('filter-q');
 
   shopFilters.q=page==='category'
@@ -1006,7 +1018,7 @@ function onFilterChange(){
 
   render();
 
-  if(page!=='category'){
+  if(page==='shop' && restoreSearchFocus){
     document.getElementById('filter-q')?.focus();
   }
 }
@@ -1373,7 +1385,6 @@ function adminPage(){
 
   return `<main class="admin-page"><div class="admin-shell"><aside class="admin-aside"><a class="logo" href="${link()}"><span class="logo-mark">S</span><span class="logo-type"><b>SPORT<span style="color:var(--lime)">HUB</span></b><small>TRANG QUẢN TRỊ</small></span></a><h4>ĐIỀU HƯỚNG</h4><div class="admin-menu">${nav.map(([id,label])=>`<button class="${adminTab===id?'active':''}" data-action="admin-tab" data-tab="${id}">${escapeHTML(label)}</button>`).join('')}</div></aside><div class="admin-main">${gate==='demo'?'<div class="notice warning">CHẾ ĐỘ XEM TRƯỚC: chỉ hiển thị giao diện. Không có dữ liệu khách hàng thật, không có quyền sửa, tạo ảnh hoặc xác nhận thanh toán.</div>':''}<div class="admin-titlebar"><div><h1>${escapeHTML(nav.find(x=>x[0]===adminTab)?.[1]||'Quản trị')}</h1><p>${gate==='live'?'Quản lý nội dung và dữ liệu được bảo vệ trên hệ thống.':'Bản trình diễn thiết kế giao diện quản trị.'}</p></div><a class="btn outline sm" href="${link()}">↗ Xem cửa hàng</a></div><div id="admin-content">${adminContent(gate)}</div></div></div></main>`;
 }
-
 function adminContent(gate){
   if(adminTab==='dashboard'){
     const count=gate==='live'?adminOrders.length:0;
@@ -1412,7 +1423,7 @@ function adminContent(gate){
   }
 
   if(adminTab==='products'){
-    return `<div class="panel"><div class="section-header"><div><h3>Quản lý sản phẩm</h3><p class="muted">Mỗi sản phẩm có hình ảnh và dữ liệu riêng.</p></div>${gate==='live'?'<button class="btn sm" data-action="new-product">+ Thêm sản phẩm</button>':''}</div><div class="table-wrap"><table class="data-table"><thead><tr><th>Sản phẩm</th><th>Danh mục</th><th>Giá</th><th>Kho</th><th>Thao tác</th></tr></thead><tbody>${products.slice(0,60).map(p=>`<tr><td><div style="display:flex;align-items:center;gap:9px"><img src="${asset(p.image)}" alt=""><span class="mini-title">${escapeHTML(p.name)}<br><small class="muted">${p.id}</small></span></div></td><td>${escapeHTML(catName(p.category))}</td><td>${money(price(p))}</td><td>${p.stock}</td><td>${gate==='live'?`<button class="btn sm ghost" data-action="edit-product" data-id="${p.id}">Sửa</button> <button class="btn sm outline" data-action="delete-product" data-id="${p.id}">Ẩn</button>`:'Chỉ xem'}</td></tr>`).join('')}</tbody></table></div></div><div id="admin-modal"></div>`;
+    return `<div class="panel"><div class="section-header"><div><h3>Quản lý sản phẩm</h3><p class="muted">Mỗi sản phẩm có hình ảnh và dữ liệu riêng.</p></div>${gate==='live'?'<button class="btn sm" data-action="new-product">+ Thêm sản phẩm</button>':''}</div><div class="table-wrap"><table class="data-table"><thead><tr><th>Sản phẩm</th><th>Danh mục</th><th>Giá</th><th>Kho</th><th>Thao tác</th></tr></thead><tbody>${products.slice(0,60).map(p=>`<tr><td><div style="display:flex;align-items:center;gap:9px">${productPhoto(p,{width:54,height:54,small:true})}<span class="mini-title">${escapeHTML(p.name)}<br><small class="muted">${p.id}</small></span></div></td><td>${escapeHTML(catName(p.category))}</td><td>${money(price(p))}</td><td>${p.stock}</td><td>${gate==='live'?`<button class="btn sm ghost" data-action="edit-product" data-id="${p.id}">Sửa</button> <button class="btn sm outline" data-action="delete-product" data-id="${p.id}">Ẩn</button>`:'Chỉ xem'}</td></tr>`).join('')}</tbody></table></div></div><div id="admin-modal"></div>`;
   }
 
   if(adminTab==='orders'){
@@ -1566,14 +1577,13 @@ function productEditor(p){
     </form>
   </div>`;
 }
-
 // Delegated navigation/actions
 let filterTimer;
 
 document.addEventListener('input',e=>{
   if(e.target.id==='filter-q'){
     clearTimeout(filterTimer);
-    filterTimer=setTimeout(onFilterChange,350);
+    filterTimer=setTimeout(()=>onFilterChange(true),350);
   }
 
   if(e.target.id==='crm-search'){
@@ -1592,6 +1602,11 @@ document.addEventListener('input',e=>{
 });
 
 document.addEventListener('change',async e=>{
+  if(page==='category' && e.target.id==='filter-cat'){
+    const target=e.target.value;
+    location.href=target ? link('danh-muc/'+target) : link('san-pham');
+    return;
+  }
   if(
     ['filter-cat','filter-max','filter-sort','filter-sale']
       .includes(e.target.id)
@@ -1965,12 +1980,9 @@ document.addEventListener('submit',async e=>{
       '\n\n'+x.get('message')
     );
 
-    notify(
-      'Liên hệ trực tiếp qua email: '+
-      settings.contactEmail+
-      ' (website chưa có dịch vụ gửi form).',
-      'error'
-    );
+    // Open the user's email client; no message is sent by this website.
+    location.href='mailto:'+settings.contactEmail+
+      '?subject='+subject+'&body='+body;
   }
 
   if(form.id==='profile-form'){

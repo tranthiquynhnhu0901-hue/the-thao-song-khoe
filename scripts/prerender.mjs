@@ -7,8 +7,10 @@
  * - Clean directory URLs
  * - No /index.html suffix
  *
- * Only the homepage embeds CSS and SVG previews
+ * Only the homepage embeds CSS and existing SVG previews
  * for standalone HTML viewing.
+ *
+ * Product WebP names are preserved exactly as provided.
  *
  * Runtime app.js replaces the static snapshot
  * when JavaScript is available.
@@ -95,7 +97,9 @@ function collect(dir) {
       allHTML.push(join(dir, ent.name));
 
     }
+
   }
+
 }
 
 
@@ -116,7 +120,10 @@ function makeElement() {
     classList: {
       toggle() {},
       add() {},
-      remove() {}
+      remove() {},
+      contains() {
+        return false;
+      }
     },
 
     setAttribute(name, value) {
@@ -132,6 +139,7 @@ function makeElement() {
     append() {}
 
   };
+
 }
 
 
@@ -162,7 +170,8 @@ function render(page, slug, path) {
   const context = {
 
     window: {
-      SPORT_CONFIG: {}
+      SPORT_CONFIG: {},
+      addEventListener() {}
     },
 
     document: {
@@ -235,7 +244,10 @@ function render(page, slug, path) {
 
     navigator: {},
 
-    setTimeout() {},
+    setTimeout() {
+      return 1;
+    },
+
     clearTimeout() {},
 
     fetch() {
@@ -250,21 +262,30 @@ function render(page, slug, path) {
 
   vm.createContext(context);
 
-  // Load product data first.
+  // Load the existing product data.
   vm.runInContext(
     productsCode,
     context,
-    { filename: 'products.js' }
+    {
+      filename: 'products.js',
+      timeout: 5000
+    }
   );
 
   // Render the corresponding page.
   vm.runInContext(
     appCode,
     context,
-    { filename: 'app.js' }
+    {
+      filename: 'app.js',
+      timeout: 5000
+    }
   );
 
-  if (!markup.includes('<main')) {
+  if (
+    typeof markup !== 'string' ||
+    !/<main(?:\s|>)/i.test(markup)
+  ) {
 
     throw new Error(
       `Missing main content while prerendering ${path || '/'}`
@@ -273,11 +294,12 @@ function render(page, slug, path) {
   }
 
   return markup;
+
 }
 
 
 // ============================================================
-// INLINE SVG FOR HOMEPAGE PREVIEW
+// INLINE EXISTING SVG FOR HOMEPAGE PREVIEW
 // ============================================================
 
 function inlineRootSvg(pathAndQuery) {
@@ -288,15 +310,13 @@ function inlineRootSvg(pathAndQuery) {
     return null;
   }
 
-  const svgPath = path.endsWith('.webp')
-    ? path.replace(/\.webp$/i, '.svg')
-    : path;
-
-  if (!svgPath.endsWith('.svg')) {
+  // Only inline an image that is already an SVG.
+  // Never rename a product .webp image to .svg.
+  if (!/\.svg$/i.test(path)) {
     return null;
   }
 
-  const fullPath = resolve(ROOT, svgPath);
+  const fullPath = resolve(ROOT, path);
 
   // Prevent reading outside the repository.
   if (
@@ -310,6 +330,7 @@ function inlineRootSvg(pathAndQuery) {
     encodeURIComponent(
       readFileSync(fullPath, 'utf8')
     );
+
 }
 
 
@@ -334,9 +355,10 @@ function rewrite(markup, prefix, isRoot) {
         )
 
         // Normalize legacy asset paths.
+        // This does not change product filenames.
         .replace(/^assets\//i, '');
 
-      // Standalone homepage can display local SVG images.
+      // Preserve existing SVG previews on homepage.
       if (isRoot) {
 
         const inline = inlineRootSvg(path);
@@ -347,26 +369,35 @@ function rewrite(markup, prefix, isRoot) {
 
       }
 
-      // Preserve directory URLs with trailing slash.
+      // A bare homepage link must not become href="".
+      if (!path) {
+        return prefix || './';
+      }
+
+      // Preserve clean directory URLs and WebP filenames.
       return prefix + path;
 
     }
+
   );
+
 }
-
-
 // ============================================================
 // FIND GENERATED ROUTES
 // ============================================================
 
 collect(ROOT);
 
-let count = 0;
-
 
 // ============================================================
 // MATCH APP HTML SHELL
 // ============================================================
+
+// Match #app through its closing tag immediately before
+// the existing site-config.js script.
+//
+// Keep the document <head> intact so that generated SEO
+// titles, descriptions, canonical and schema are preserved.
 
 const appShell =
   /<div\s+id=["']app["'][^>]*>[\s\S]*?<\/div>\s*(?=<script\s+src=["'](?:\.\.\/)*js\/site-config\.js["'])/i;
@@ -392,8 +423,15 @@ const stylesheetLink =
 
 
 // ============================================================
-// PROCESS ALL HTML ROUTES
+// PREPARE ALL HTML ROUTES
 // ============================================================
+
+// Prepare every page first.
+//
+// If prerendering fails on any route, stop before
+// overwriting existing HTML files.
+
+const preparedPages = [];
 
 for (const filename of allHTML) {
 
@@ -403,6 +441,7 @@ for (const filename of allHTML) {
     /<body\s+data-page="([^"]+)"\s+data-slug="([^"]*)"/i
   );
 
+  // Leave unrelated index.html files untouched.
   if (!pageData) {
     continue;
   }
@@ -421,13 +460,7 @@ for (const filename of allHTML) {
     path ? path.split('/').length : 0
   );
 
-  // Render static content.
-  const snapshot = rewrite(
-    render(pageData[1], pageData[2], path),
-    prefix,
-    isRoot
-  );
-
+  // The HTML shell must exist before any changes.
   if (!appShell.test(doc)) {
 
     throw new Error(
@@ -436,12 +469,28 @@ for (const filename of allHTML) {
 
   }
 
-  // Insert HTML snapshot.
+  // Render content using the existing app.js.
+  const snapshot = rewrite(
+    render(pageData[1], pageData[2], path),
+    prefix,
+    isRoot
+  );
+
+  // Replace only the body content inside #app.
+  // Using a callback avoids special replacement-string
+  // interpretation of $ characters in rendered markup.
   doc = doc.replace(
 
     appShell,
 
-    `<div id="app">${snapshot}<noscript><p class="container">Để sử dụng giỏ hàng và bộ lọc sản phẩm, vui lòng bật JavaScript.</p></noscript></div>\n`
+    () =>
+      `<div id="app">${snapshot}` +
+      `<noscript>` +
+      `<p class="container">` +
+      `Để sử dụng giỏ hàng và bộ lọc sản phẩm, ` +
+      `vui lòng bật JavaScript.` +
+      `</p>` +
+      `</noscript></div>\n`
 
   );
 
@@ -461,29 +510,63 @@ for (const filename of allHTML) {
 
     }
 
+    // Keep the existing CSS content unchanged.
+    // Escape a possible HTML closing-style sequence.
     const safeCSS = stylesheet.replace(
       /<\/style/gi,
       '<\\/style'
     );
 
+    // Preserve the actual linked stylesheet.
+    // Inline CSS is only an extra homepage preview.
     doc = doc.replace(
 
       stylesheetLink,
 
-      `$1\n<style data-sporthub-preview-css>\n${safeCSS}\n</style>`
+      match =>
+        `${match}\n` +
+        `<style data-sporthub-preview-css>\n` +
+        `${safeCSS}\n` +
+        `</style>`
 
     );
 
   }
 
-  // Save prerendered HTML.
-  writeFileSync(
+  // Do not write yet: wait until every route succeeds.
+  preparedPages.push({
     filename,
-    doc,
+    content: doc
+  });
+
+}
+
+
+// ============================================================
+// VERIFY PREPARED ROUTES
+// ============================================================
+
+if (preparedPages.length === 0) {
+
+  throw new Error(
+    'No SPORTHUB HTML routes found for prerendering.'
+  );
+
+}
+
+
+// ============================================================
+// WRITE PRERENDERED HTML
+// ============================================================
+
+for (const page of preparedPages) {
+
+  writeFileSync(
+    page.filename,
+    page.content,
     'utf8'
   );
 
-  count++;
 }
 
 
@@ -492,5 +575,6 @@ for (const filename of allHTML) {
 // ============================================================
 
 console.log(
-  `Prerendered ${count} HTML routes with clean URLs; preview CSS only on homepage.`
+  `Prerendered ${preparedPages.length} HTML routes ` +
+  'with clean URLs; preview CSS only on homepage.'
 );
